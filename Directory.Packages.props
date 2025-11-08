@@ -10,10 +10,11 @@
     <PackageVersion Include="Mopups" Version="1.3.4" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.0.0-1.25277.114" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0-2.final" />
-    <PackageVersion Include="Plugin.Maui.SmartNavigation" Version="0.0.1-preview1" />
+    <PackageVersion Include="Plugin.Maui.SmartNavigation" Version="3.0.0-rc.1" />
     <!-- Test dependencies -->
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageVersion Include="Plugin.Maui.SmartNavigation.MopupsExtensions" Version="3.0.0-rc.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="Moq" Version="4.20.72" />

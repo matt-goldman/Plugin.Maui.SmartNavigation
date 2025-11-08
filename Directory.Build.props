@@ -5,11 +5,9 @@
     <Company></Company>
     <RepositoryUrl>https://github.com/matt-goldman/Plugin.Maui.SmartNavigation</RepositoryUrl>
     <Copyright>Matt Goldman 2025</Copyright>
-    <PackageLicenseExpression></PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageIconUrl />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>0.0.1-preview1</Version>
+    <Version>3.0.0-rc.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
