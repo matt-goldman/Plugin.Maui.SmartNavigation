@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build'
+        required: true
+        default: '0.0.0'
+
+    
+jobs:
+  build:
+
+    env:
+      BUILD_CONFIG: 'Release'
+      SOLUTION: '.\src\Plugin.Maui.SmartNavigation.slnx'
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+  
+
+    # - name: Install workloads
+    #   run: dotnet workload install maui maui-windows
+
+    # - name: Restore dependencies
+    #   run: dotnet restore $env:SOLUTION
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+        include-prerelease: true
+
+    - name: Install workloads
+      run: dotnet workload install maui
+
+    - name: Build
+      run: dotnet build $env:SOLUTION --configuration $env:BUILD_CONFIG -p:Version=${{ github.event.inputs.version }}
+
+    - name: Run Integration Tests
+      run: dotnet test src\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration $env:BUILD_CONFIG --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      continue-on-error: false
+
+    - name: Publish Test Results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: '**/test-results.trx'
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+      
+    - name: Publish
+      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}

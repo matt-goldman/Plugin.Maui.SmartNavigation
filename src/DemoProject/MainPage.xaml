@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="DemoProject.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DemoProject.ViewModels"
+             x:DataType="vm:MainViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0"
+                             Spacing="25"
+                             VerticalOptions="Center">
+
+            <Label FontSize="32"
+                   HorizontalOptions="Center"
+                   SemanticProperties.HeadingLevel="Level1"
+                   Text="Hello:" />
+
+            <Label FontSize="18"
+                   HorizontalOptions="Center"
+                   SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                   SemanticProperties.HeadingLevel="Level1"
+                   Text="{Binding Name}" />
+
+            <Button Command="{Binding GetNameCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Text="Click to show name on this page" />
+
+            <Button Command="{Binding GoToPageParamPageCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Text="Click to go to page param page" />
+
+            <Button Command="{Binding GoToVmParamPageCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Text="Click to go to VM param page" />
+
+            <Button Command="{Binding GoToMarkupCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Text="Click to go to markup page" />
+
+            <Button Command="{Binding GoToScopeCheckCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Text="Click to go to scope check page" />
+
+            <Button Command="{Binding GoToBrokenPageCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Crashes the app!"
+                    Text="Click to go to ignored dependency page (expect crash)" />
+
+            <Button Command="{Binding ShowEasyPopupCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Shows a resolved popup"
+                    Text="Click to show popup with resolved dependncy" />
+
+            <Button Command="{Binding ShowParamPopupCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Shows a resolved popup with a parameter"
+                    Text="Click to show popup with parameter and resolved dependency" />
+
+            <Button Grid.Row="4"
+                    Command="{Binding TriggerAggregateExceptionCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Throws an aggregate exception"
+                    Text="Click to trigger aggregate exception" />
+
+            <Button Command="{Binding GoToNavigationManagerDemoCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Shows INavigationManager and IViewModelLifecycle features"
+                    Text="INavigationManager &amp; Lifecycle Demo"
+                    TextColor="White" />
+
+            <Image HeightRequest="310"
+                   HorizontalOptions="Center"
+                   SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                   Source="dotnet_bot.png"
+                   WidthRequest="250" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
