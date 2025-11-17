@@ -29,6 +29,8 @@ jobs:
 
     - name: Build
       run: dotnet build $env:SOLUTION --configuration $env:BUILD_CONFIG
+      env:
+        IS_CI_TEST: true
 
     - name: Run Integration Tests
       run: dotnet test src\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration $env:BUILD_CONFIG --verbosity normal --logger "trx;LogFileName=test-results.trx"
