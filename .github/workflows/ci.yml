@@ -9,69 +9,19 @@ on:
     
 jobs:
 
-  build:
-    env:
-      BUILD_CONFIG: 'Release'
-      SOLUTION: '.\Plugin.Maui.SmartNavigation.slnx'
-
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 10.0.x
-
-    - name: Install workloads
-      run: dotnet workload install maui
-
-    - name: Build
-      run: dotnet build $env:SOLUTION --configuration $env:BUILD_CONFIG
-      env:
-        IS_CI_TEST: true
-
-    - name: Run Integration Tests
-      run: dotnet test tests\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration $env:BUILD_CONFIG --verbosity normal --logger "trx;LogFileName=test-results.trx"
-      continue-on-error: false
-      env:
-        IS_CI_TEST: true
-
-    - name: Publish Test Results
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: test-results
-        path: '**/test-results.trx'
-
   generate-version:
-    needs: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     outputs:
-      new_version: ${{ steps.use_provided_version.outputs.version || steps.tag_bump_release.outputs.new_tag || steps.tag_bump_preview.outputs.new_tag }}
+      new_version: ${{ steps.tag_bump_release.outputs.new_tag || steps.tag_bump_preview.outputs.new_tag }}
       NORELEASE: ${{ steps.check_norelease.outputs.norelease }}
 
     steps:
-      - name: Use Provided Version
-        id: use_provided_version
-        if: github.event.inputs.version != ''
-        run: |
-          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-          echo "✅ Using provided version: ${{ github.event.inputs.version }}"
-
-      - name: Set No Release Flag for Provided Version
-        id: check_norelease
-        if: github.event.inputs.version != ''
-        run: |
-          echo "norelease=false" >> $GITHUB_OUTPUT
-
       - uses: actions/checkout@v2
-        if: github.event.inputs.version == ''
+        with:
+          fetch-depth: 0
 
       - name: Get last merged PR labels
         id: prlabels
-        shell: bash
         run: |
           PR=$(gh pr list --state merged --base main --limit 1 --json number --jq '.[0].number')
           LABELS=$(gh pr view $PR --json labels --jq '[.labels[].name]')
@@ -115,6 +65,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set No Release Flag
+        id: check_norelease
+        run: |
+          echo "norelease=${{ env.NORELEASE }}" >> $GITHUB_OUTPUT
 
       - name: GitHub Tag Bump (Release)
         id: tag_bump_release
@@ -129,7 +83,6 @@ jobs:
       - name: Get Latest Tag
         id: get_latest_tag
         if: env.PRERELEASE == 'true' && env.NORELEASE != 'true'
-        shell: bash
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "3.0.0")
           echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
@@ -137,7 +90,6 @@ jobs:
       - name: Calculate Preview Version
         id: calc_preview_version
         if: env.PRERELEASE == 'true' && env.NORELEASE != 'true'
-        shell: bash
         run: |
           LATEST_TAG="${{ steps.get_latest_tag.outputs.latest_tag }}"
           # Remove 'v' prefix if present
@@ -165,31 +117,153 @@ jobs:
       - name: Create Preview Tag
         id: tag_bump_preview
         if: env.PRERELEASE == 'true' && env.NORELEASE != 'true'
-        shell: bash
         run: |
           NEW_VERSION="${{ steps.calc_preview_version.outputs.new_version }}"
           git tag "$NEW_VERSION"
           git push origin "$NEW_VERSION"
           echo "new_tag=$NEW_VERSION" >> $GITHUB_OUTPUT
 
+  build:
+    needs: generate-version
+    if: needs.generate-version.outputs.NORELEASE != 'true'
+    env:
+      BUILD_CONFIG: 'Release'
+      SOLUTION: '.\Plugin.Maui.SmartNavigation.slnx'
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: Install workloads
+      run: dotnet workload install maui
+
+    - name: Build
+      run: dotnet build $env:SOLUTION --configuration $env:BUILD_CONFIG
+      env:
+        IS_CI_TEST: true
+
+    - name: Pack SmartNavigation
+      run: dotnet pack src\Plugin.Maui.SmartNavigation\Plugin.Maui.SmartNavigation.csproj --configuration $env:BUILD_CONFIG --no-build -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} -o packages
+      env:
+        IS_CI_TEST: true
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-packages
+        path: packages/*.nupkg
+
+  test:
+    needs: 
+      - generate-version
+      - build
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    - name: Install workloads
+      run: dotnet workload install maui
+
+    - name: Run Integration Tests
+      run: dotnet test tests\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      continue-on-error: false
+      env:
+        IS_CI_TEST: true
+
+    - name: Publish Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: '**/test-results.trx'
+
   publish-smartnavigation:
     if: needs.generate-version.outputs.NORELEASE != 'true'
-    uses: ./.github/workflows/reusable-publish.yml
     needs: 
       - build
-      - generate-version  
-    with:
-      project_path: 'src/Plugin.Maui.SmartNavigation/Plugin.Maui.SmartNavigation.csproj'
-      version: ${{ needs.generate-version.outputs.new_version }}
+      - test
+      - generate-version
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-packages
+          path: packages
+
+      - name: Push to NuGet
+        run: |
+          dotnet nuget push packages/Plugin.Maui.SmartNavigation.${{ needs.generate-version.outputs.new_version }}.nupkg \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
 
   publish-mopupsextensions:
     if: needs.generate-version.outputs.NORELEASE != 'true'
-    uses: ./.github/workflows/reusable-publish.yml
     needs: 
       - build
-      - generate-version  
-    with:
-      project_path: 'src/Plugin.Maui.SmartNavigation.MopupsExtensions/Plugin.Maui.SmartNavigation.MopupsExtensions.csproj'
-      version: ${{ needs.generate-version.outputs.new_version }}
-      wait_for_package_id: 'Plugin.Maui.SmartNavigation'
-      wait_for_package_version: ${{ needs.generate-version.outputs.new_version }}
+      - test
+      - generate-version
+      - publish-smartnavigation
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Wait for Plugin.Maui.SmartNavigation ${{ needs.generate-version.outputs.new_version }} to be available on NuGet
+        shell: bash
+        run: |
+            PACKAGE_ID_LOWER="plugin.maui.smartnavigation"
+            PACKAGE_URL="https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID_LOWER/${{ needs.generate-version.outputs.new_version }}/$PACKAGE_ID_LOWER.${{ needs.generate-version.outputs.new_version }}.nupkg"
+
+            echo "Polling for: $PACKAGE_URL"
+            for i in {1..30}; do
+            if curl --head --silent --fail "$PACKAGE_URL" > /dev/null; then
+                echo "Package available!"
+                break
+            fi
+            echo "Not yet available... retrying in 10s"
+            sleep 10
+            done
+
+            echo "Done waiting (or max retries reached)"
+
+      - name: Install workloads
+        run: dotnet workload install maui
+
+      - name: Build MopupsExtensions
+        run: dotnet build src\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj --configuration Release
+
+      - name: Pack MopupsExtensions
+        run: |
+          dotnet pack src\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj `
+            --configuration Release `
+            --no-build `
+            -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} `
+            -o packages
+
+      - name: Push to NuGet
+        run: |
+          dotnet nuget push packages\*.nupkg `
+            --api-key ${{ secrets.NUGET_API_KEY }} `
+            --source https://api.nuget.org/v3/index.json `
+            --skip-duplicate
