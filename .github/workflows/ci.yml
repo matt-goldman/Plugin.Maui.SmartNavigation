@@ -71,6 +71,7 @@ jobs:
 
       - name: Get last merged PR labels
         id: prlabels
+        shell: bash
         run: |
           PR=$(gh pr list --state merged --base main --limit 1 --json number --jq '.[0].number')
           LABELS=$(gh pr view $PR --json labels --jq '[.labels[].name]')
@@ -128,6 +129,7 @@ jobs:
       - name: Get Latest Tag
         id: get_latest_tag
         if: env.PRERELEASE == 'true' && env.NORELEASE != 'true'
+        shell: bash
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "3.0.0")
           echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
@@ -135,6 +137,7 @@ jobs:
       - name: Calculate Preview Version
         id: calc_preview_version
         if: env.PRERELEASE == 'true' && env.NORELEASE != 'true'
+        shell: bash
         run: |
           LATEST_TAG="${{ steps.get_latest_tag.outputs.latest_tag }}"
           # Remove 'v' prefix if present
@@ -162,6 +165,7 @@ jobs:
       - name: Create Preview Tag
         id: tag_bump_preview
         if: env.PRERELEASE == 'true' && env.NORELEASE != 'true'
+        shell: bash
         run: |
           NEW_VERSION="${{ steps.calc_preview_version.outputs.new_version }}"
           git tag "$NEW_VERSION"
