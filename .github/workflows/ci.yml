@@ -12,7 +12,7 @@ jobs:
   build:
     env:
       BUILD_CONFIG: 'Release'
-      SOLUTION: '.\src\Plugin.Maui.SmartNavigation.slnx'
+      SOLUTION: '.\Plugin.Maui.SmartNavigation.slnx'
 
     runs-on: windows-latest
 
