@@ -236,7 +236,7 @@ jobs:
         run: dotnet workload install maui
 
       - name: Build MopupsExtensions
-        run: dotnet build src\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj --configuration Release
+        run: dotnet build src\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj --configuration Release -p:PluginMauiSmartNavigationVersion=${{ needs.generate-version.outputs.new_version }}
 
       - name: Pack MopupsExtensions
         run: |
