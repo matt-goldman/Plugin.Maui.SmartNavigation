@@ -10,7 +10,8 @@
     <PackageVersion Include="Mopups" Version="1.3.4" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.0.0-1.25277.114" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0-2.final" />
-    <PackageVersion Include="Plugin.Maui.SmartNavigation" Version="$(PluginMauiSmartNavigationVersion)" Condition="'$(PluginMauiSmartNavigationVersion)'!='' AND '$(IS_CI_TEST)'!='true'" />
+    <!-- Use specific version when provided (for MopupsExtensions publish), otherwise use floating for local dev, exclude entirely during CI tests -->
+    <PackageVersion Include="Plugin.Maui.SmartNavigation" Version="$(PluginMauiSmartNavigationVersion)" Condition="'$(PluginMauiSmartNavigationVersion)'!=''" />
     <PackageVersion Include="Plugin.Maui.SmartNavigation" Version="*" Condition="'$(PluginMauiSmartNavigationVersion)'=='' AND '$(IS_CI_TEST)'!='true'" />
     <!-- Test dependencies -->
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
