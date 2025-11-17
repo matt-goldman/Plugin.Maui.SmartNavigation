@@ -33,7 +33,7 @@ jobs:
         IS_CI_TEST: true
 
     - name: Run Integration Tests
-      run: dotnet test src\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration $env:BUILD_CONFIG --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test tests\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration $env:BUILD_CONFIG --verbosity normal --logger "trx;LogFileName=test-results.trx"
       continue-on-error: false
       env:
         IS_CI_TEST: true
