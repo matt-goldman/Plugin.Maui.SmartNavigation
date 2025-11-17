@@ -7,7 +7,7 @@
     <Copyright>Matt Goldman 2025</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>3.0.0-rc.1</Version>
+    <Version>3.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
