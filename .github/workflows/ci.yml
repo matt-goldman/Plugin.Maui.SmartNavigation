@@ -6,6 +6,10 @@ on:
     paths:
       - 'src/**'
   workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
     
 jobs:
 
