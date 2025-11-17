@@ -127,15 +127,13 @@ jobs:
           git push origin "$NEW_VERSION"
           echo "new_tag=$NEW_VERSION" >> $GITHUB_OUTPUT
 
-  build:
+  build-and-test:
     needs: generate-version
-    if: needs.generate-version.outputs.NORELEASE != 'true'
+    runs-on: windows-latest
     env:
       BUILD_CONFIG: 'Release'
       SOLUTION: '.\Plugin.Maui.SmartNavigation.slnx'
-
-    runs-on: windows-latest
-
+    
     steps:
     - uses: actions/checkout@v2
 
@@ -152,36 +150,8 @@ jobs:
       env:
         IS_CI_TEST: true
 
-    - name: Pack SmartNavigation
-      run: dotnet pack src\Plugin.Maui.SmartNavigation\Plugin.Maui.SmartNavigation.csproj --configuration $env:BUILD_CONFIG --no-build -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} -o packages
-      env:
-        IS_CI_TEST: true
-
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-packages
-        path: packages/*.nupkg
-
-  test:
-    needs: 
-      - generate-version
-      - build
-    runs-on: windows-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 10.0.x
-
-    - name: Install workloads
-      run: dotnet workload install maui
-
     - name: Run Integration Tests
-      run: dotnet test tests\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test tests\Plugin.Maui.SmartNavigation.IntegrationTests\Plugin.Maui.SmartNavigation.IntegrationTests.csproj --configuration $env:BUILD_CONFIG --verbosity normal --logger "trx;LogFileName=test-results.trx" --no-build
       continue-on-error: false
       env:
         IS_CI_TEST: true
@@ -193,11 +163,23 @@ jobs:
         name: test-results
         path: '**/test-results.trx'
 
+    - name: Pack SmartNavigation
+      if: needs.generate-version.outputs.NORELEASE != 'true'
+      run: dotnet pack src\Plugin.Maui.SmartNavigation\Plugin.Maui.SmartNavigation.csproj --configuration $env:BUILD_CONFIG --no-build -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} -o packages
+      env:
+        IS_CI_TEST: true
+
+    - name: Upload Build Artifacts
+      if: needs.generate-version.outputs.NORELEASE != 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-packages
+        path: packages/*.nupkg
+
   publish-smartnavigation:
     if: needs.generate-version.outputs.NORELEASE != 'true'
     needs: 
-      - build
-      - test
+      - build-and-test
       - generate-version
     runs-on: ubuntu-latest
     
@@ -218,8 +200,7 @@ jobs:
   publish-mopupsextensions:
     if: needs.generate-version.outputs.NORELEASE != 'true'
     needs: 
-      - build
-      - test
+      - build-and-test
       - generate-version
       - publish-smartnavigation
     runs-on: windows-latest
