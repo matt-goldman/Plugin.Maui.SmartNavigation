@@ -16,7 +16,8 @@
     <!-- Test dependencies -->
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
-    <PackageVersion Include="Plugin.Maui.SmartNavigation.MopupsExtensions" Version="*" Condition="'$(IS_CI_TEST)'!='true'" />
+    <PackageVersion Include="Plugin.Maui.SmartNavigation.MopupsExtensions" Version="$(PluginMauiSmartNavigationVersion)" Condition="'$(PluginMauiSmartNavigationVersion)'!=''" />
+    <PackageVersion Include="Plugin.Maui.SmartNavigation.MopupsExtensions" Version="*" Condition="'$(PluginMauiSmartNavigationVersion)'=='' AND '$(IS_CI_TEST)'!='true'" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="Moq" Version="4.20.72" />
