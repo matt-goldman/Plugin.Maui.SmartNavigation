@@ -9,35 +9,52 @@ public sealed class AutoDependenciesTests
     {
         // Arrange
         const string source = """
-			namespace DemoProject;
+			namespace TestAssembly;
 
 			public static class MauiProgram
 			{
-				public static MauiApp CreateMauiApp()
-				{
-				}
+			    public static MauiApp CreateMauiApp()
+			    {
+			    }
 			}
+
+			public class HomePage { }
+
+			public class HomePageViewModel { }
+
+			public interface IMyService { }
+
+			public class MyService : IMyService { }
 			""";
 
         await TestHelper.Verify(source);
     }
 
     [Fact]
-    public async Task AutoDependencies_UseAutoDependencies_GenertateCode()
+    public async Task AutoDependencies_GeneratesRegs_ForPagesViewModelsAndServices()
     {
         // Arrange
         const string source = """
-			namespace DemoProject;
+            namespace TestAssembly;
 
-			[UseAutoDependencies]
-			public static class MauiProgram
-			{
-				public static MauiApp CreateMauiApp()
-				{
-				}
-			}
-			""";
+            [Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute]
+            public static class MauiProgram
+            {
+                public static MauiApp CreateMauiApp()
+                {
+                }
+            }
 
+            public class HomePage { }
+
+            public class HomePageViewModel { }
+
+            public interface IMyService { }
+
+            public class MyService : IMyService { }
+            """;
+
+        // Assert
         await TestHelper.Verify(source);
     }
 }

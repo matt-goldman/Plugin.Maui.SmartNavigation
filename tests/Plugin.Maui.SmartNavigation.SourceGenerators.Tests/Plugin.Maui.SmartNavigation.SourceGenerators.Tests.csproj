@@ -33,6 +33,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Plugin.Maui.SmartNavigation.SourceGenerators\Plugin.Maui.SmartNavigation.SourceGenerators.csproj" />
+		<ProjectReference Include="..\..\src\Plugin.Maui.SmartNavigation\Plugin.Maui.SmartNavigation.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -39,16 +39,18 @@ namespace Plugin.Maui.SmartNavigation.SourceGenerators
 
                     var mauiProgram = compilation.GetTypeByMetadataName(mauiProgramName);
 
-                    if (mauiProgram is null)
+                    if(mauiProgram is null)
                     {
                         Log.WriteLine("MauiProgram not found");
                         return;
                     }
 
+                    var test = mauiProgram.GetAttributes();
+
                     bool hasUseAutoDependenciesAttribute = mauiProgram.GetAttributes()
                         .Any(ad => ad.AttributeClass?.ToDisplayString() == "Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute");
 
-                    if (!hasUseAutoDependenciesAttribute)
+                    if(!hasUseAutoDependenciesAttribute)
                     {
                         Log.WriteLine("UseAutoDependenciesAttribute not found, skipping.");
                         return;
@@ -81,7 +83,7 @@ public static class PageResolverExtensions
 ");
 
                     // add page registrations
-                    foreach (var page in dependencies["Pages"])
+                    foreach(var page in dependencies["Pages"])
                     {
                         string lifetime = dependencies["ExplicitSingletons"].Contains(page) ? "Singleton" : "Transient";
 
@@ -94,7 +96,7 @@ public static class PageResolverExtensions
 ");
 
                     // add ViewModel registrations
-                    foreach (var vm in dependencies["ViewModels"])
+                    foreach(var vm in dependencies["ViewModels"])
                     {
                         string lifetime = dependencies["ExplicitSingletons"].Contains(vm) ? "Singleton" : "Transient";
 
@@ -107,13 +109,13 @@ public static class PageResolverExtensions
 ");
 
                     // add Service registrations
-                    foreach (var service in dependencies["Services"])
+                    foreach(var service in dependencies["Services"])
                     {
                         string lifetime = dependencies["ExplicitTransients"].Contains(service) ? "Transient" : "Singleton";
 
                         var abstraction = dependencies["Abstractions"].Where(a => a.Name == $"I{service.Name}").FirstOrDefault();
 
-                        if (abstraction is null)
+                        if(abstraction is null)
                         {
                             sourceBuilder.AppendLine($"         builder.Services.Add{lifetime}<global::{service.ToDisplayString()}>();");
                         }
@@ -133,7 +135,7 @@ public static class PageResolverExtensions
 
                     var mappings = GetPageToViewModelMappings(dependencies);
 
-                    foreach (var mapping in mappings)
+                    foreach(var mapping in mappings)
                     {
                         sourceBuilder.AppendLine($"         ViewModelMappings.Add(typeof(global::{mapping.Key.ToDisplayString()}), typeof(global::{mapping.Value.ToDisplayString()}));");
                     }
@@ -155,7 +157,7 @@ public static class PageResolverExtensions
                     spc.AddSource("PageResolverExtensions.g.cs", sourceBuilder.ToString());
                     Log.WriteLine($"Generated: PageResolverExtensions.g.cs");
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     Log.WriteLine("[AutoDependencies Source Generator] Exception thrown: ");
                     Log.WriteLine($"{ex}");
@@ -222,12 +224,12 @@ public static class PageResolverExtensions
         {
             var VMLookup = new Dictionary<ITypeSymbol, ITypeSymbol>(SymbolEqualityComparer.Default);
 
-            foreach (var page in dependencies["Pages"])
+            foreach(var page in dependencies["Pages"])
             {
                 var matches = dependencies["ViewModels"].Where(vm =>
                                vm.Name == $"{page.Name}ViewModel" || vm.Name == page.Name.Substring(0, page.Name.Length - 4) + "ViewModel").ToList();
 
-                if (matches.Count == 1)
+                if(matches.Count == 1)
                 {
                     var pageType = page.Name;
                     var vmType = matches[0].Name;
@@ -243,13 +245,13 @@ public static class PageResolverExtensions
 
         private static IEnumerable<ITypeSymbol> GetAllTypes(INamespaceSymbol root)
         {
-            foreach (var namespaceOrTypeSymbol in root.GetMembers())
+            foreach(var namespaceOrTypeSymbol in root.GetMembers())
             {
-                if (namespaceOrTypeSymbol is INamespaceSymbol @namespace)
-                    foreach (var nested in GetAllTypes(@namespace))
+                if(namespaceOrTypeSymbol is INamespaceSymbol @namespace)
+                    foreach(var nested in GetAllTypes(@namespace))
                         yield return nested;
 
-                else if (namespaceOrTypeSymbol is ITypeSymbol type)
+                else if(namespaceOrTypeSymbol is ITypeSymbol type)
                     yield return type;
             }
         }
