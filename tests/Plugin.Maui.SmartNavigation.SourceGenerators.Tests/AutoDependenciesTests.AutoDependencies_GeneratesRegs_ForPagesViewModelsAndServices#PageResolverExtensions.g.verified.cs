@@ -20,20 +20,30 @@ public static class PageResolverExtensions
 
          // pages
          builder.Services.AddTransient<global::TestAssembly.HomePage>();
+         builder.Services.AddTransient<global::TestAssembly.Test1Page>();
+         builder.Services.AddTransient<global::TestAssembly.Test2Page>();
+         builder.Services.AddTransient<global::TestAssembly.Test3Page>();
 
 
          // ViewModels
          builder.Services.AddTransient<global::TestAssembly.HomePageViewModel>();
+         builder.Services.AddSingleton<global::TestAssembly.Test2ViewModel>();
+         builder.Services.AddTransient<global::TestAssembly.Test3ViewModel>();
 
 
          // Services
          builder.Services.AddSingleton<global::TestAssembly.MyService>();
-         builder.Services.AddSingleton<global::TestAssembly.SingletonService>();
-         builder.Services.AddTransient<global::TestAssembly.TransientService>();
+         builder.Services.AddSingleton<global::TestAssembly.IMy2Service, global::TestAssembly.My2Service>();
+         builder.Services.AddSingleton<global::TestAssembly.ISingletonService, global::TestAssembly.SingletonService>();
+         builder.Services.AddSingleton<global::TestAssembly.Singleton2Service>();
+         builder.Services.AddTransient<global::TestAssembly.ITransientService, global::TestAssembly.TransientService>();
+         builder.Services.AddTransient<global::TestAssembly.Transient2Service>();
 
 
          // ViewModel to Page mappings
          ViewModelMappings.Add(typeof(global::TestAssembly.HomePage), typeof(global::TestAssembly.HomePageViewModel));
+         ViewModelMappings.Add(typeof(global::TestAssembly.Test2Page), typeof(global::TestAssembly.Test2ViewModel));
+         ViewModelMappings.Add(typeof(global::TestAssembly.Test3Page), typeof(global::TestAssembly.Test3ViewModel));
 
 
          // Initialisation

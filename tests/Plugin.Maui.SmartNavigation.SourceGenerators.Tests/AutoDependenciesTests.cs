@@ -19,14 +19,43 @@ public sealed class AutoDependenciesTests
 			}
 
 			public class HomePage { }
+			public class Test1Page { }
+			public class Test2Page { }
+			public class Test3Page { }
 
 			public class HomePageViewModel { }
+			[Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
+			public class Test1ViewModel { }
+			[Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
+			public class Test2ViewModel { }
+			[Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
+			public class Test3ViewModel { }
 
-			public interface IMyService { }
 
-			public class MyService : IMyService { }
+			public class MyService { }
+			public interface IMy2Service { }
+			public class My2Service : IMyService { }
+
+			[Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
+			public class IngoreService : IIngoreService { }
+			public interface IIngoreService { }
+			[Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
+			public class Ingore2Service { }
+
+			[Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
+			public class SingletonService : ISingletonService { }
+			public interface ISingletonService { }
+			[Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
+			public class Singleton2Service { }
+
+			[Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
+			public class TransientService : ITransientService { }
+			public interface ITransientService { }
+			[Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
+			public class Transient2Service { }
 			""";
 
+        // Assert
         await TestHelper.Verify(source);
     }
 
@@ -46,19 +75,40 @@ public sealed class AutoDependenciesTests
 			}
 
 			public class HomePage { }
+			public class Test1Page { }
+			public class Test2Page { }
+			public class Test3Page { }
 
 			public class HomePageViewModel { }
+			[Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
+			public class Test1ViewModel { }
+			[Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
+			public class Test2ViewModel { }
+			[Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
+			public class Test3ViewModel { }
 
-			public class MyService : IMyService { }
+
+			public class MyService { }
+			public interface IMy2Service { }
+			public class My2Service : IMyService { }
 
 			[Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
 			public class IngoreService : IIngoreService { }
+			public interface IIngoreService { }
+			[Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
+			public class Ingore2Service { }
 
 			[Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
 			public class SingletonService : ISingletonService { }
+			public interface ISingletonService { }
+			[Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
+			public class Singleton2Service { }
 
 			[Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
 			public class TransientService : ITransientService { }
+			public interface ITransientService { }
+			[Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
+			public class Transient2Service { }
 			""";
 
         // Assert
