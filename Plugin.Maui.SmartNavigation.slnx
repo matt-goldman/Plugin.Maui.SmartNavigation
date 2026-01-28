@@ -10,6 +10,7 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Plugin.Maui.SmartNavigation.IntegrationTests/Plugin.Maui.SmartNavigation.IntegrationTests.csproj" />
+    <Project Path="tests/Plugin.Maui.SmartNavigation.SourceGenerators.Tests/Plugin.Maui.SmartNavigation.SourceGenerators.Tests.csproj" Id="08941201-d6d2-492d-bfc3-ff7b51baab8f" />
   </Folder>
   <Project Path="src/DemoProject/DemoProject.csproj" />
 </Solution>
