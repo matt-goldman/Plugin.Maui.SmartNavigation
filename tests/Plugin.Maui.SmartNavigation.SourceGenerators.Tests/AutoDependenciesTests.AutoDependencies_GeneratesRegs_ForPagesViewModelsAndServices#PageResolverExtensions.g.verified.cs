@@ -28,6 +28,8 @@ public static class PageResolverExtensions
 
          // Services
          builder.Services.AddSingleton<global::TestAssembly.IMyService, global::TestAssembly.MyService>();
+         builder.Services.AddSingleton<global::TestAssembly.SingletonService>();
+         builder.Services.AddTransient<global::TestAssembly.TransientService>();
 
 
          // ViewModel to Page mappings

@@ -52,6 +52,15 @@ public sealed class AutoDependenciesTests
             public interface IMyService { }
 
             public class MyService : IMyService { }
+
+            [Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
+            public class IngoreService : IIngoreService { }
+
+            [Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
+            public class SingletonService : ISingletonService { }
+
+            [Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
+            public class TransientService : ITransientService { }
             """;
 
         // Assert
