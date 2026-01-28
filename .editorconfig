@@ -4,3 +4,13 @@
 csharp_style_namespace_declarations                    = file_scoped : error
 
 csharp_space_after_keywords_in_control_flow_statements = true
+
+# Verify
+[*.{received,verified}.{cs}]
+charset                  = utf-8-bom
+end_of_line              = lf
+indent_size              = unset
+indent_style             = unset
+insert_final_newline     = false
+tab_width                = unset
+trim_trailing_whitespace = false
