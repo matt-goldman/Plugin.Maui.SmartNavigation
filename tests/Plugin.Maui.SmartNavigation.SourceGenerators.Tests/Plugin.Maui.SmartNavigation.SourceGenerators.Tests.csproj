@@ -9,10 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Verify.XunitV3" />
 		<PackageReference Include="xunit.v3" />
 		<PackageReference Include="xunit.analyzers">
