@@ -13,9 +13,9 @@ public sealed class AutoDependenciesTests
 
 			public static class MauiProgram
 			{
-			    public static MauiApp CreateMauiApp()
-			    {
-			    }
+				public static MauiApp CreateMauiApp()
+				{
+				}
 			}
 
 			public class HomePage { }
@@ -35,31 +35,31 @@ public sealed class AutoDependenciesTests
     {
         // Arrange
         const string source = """
-            namespace TestAssembly;
+			namespace TestAssembly;
 
-            [Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute]
-            public static class MauiProgram
-            {
-                public static MauiApp CreateMauiApp()
-                {
-                }
-            }
+			[Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute]
+			public static class MauiProgram
+			{
+				public static MauiApp CreateMauiApp()
+				{
+				}
+			}
 
-            public class HomePage { }
+			public class HomePage { }
 
-            public class HomePageViewModel { }
+			public class HomePageViewModel { }
 
-            public class MyService : IMyService { }
+			public class MyService : IMyService { }
 
-            [Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
-            public class IngoreService : IIngoreService { }
+			[Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
+			public class IngoreService : IIngoreService { }
 
-            [Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
-            public class SingletonService : ISingletonService { }
+			[Plugin.Maui.SmartNavigation.Attributes.SingletonAttribute]
+			public class SingletonService : ISingletonService { }
 
-            [Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
-            public class TransientService : ITransientService { }
-            """;
+			[Plugin.Maui.SmartNavigation.Attributes.TransientAttribute]
+			public class TransientService : ITransientService { }
+			""";
 
         // Assert
         await TestHelper.Verify(source);
