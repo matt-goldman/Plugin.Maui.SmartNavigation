@@ -49,8 +49,6 @@ public sealed class AutoDependenciesTests
 
             public class HomePageViewModel { }
 
-            public interface IMyService { }
-
             public class MyService : IMyService { }
 
             [Plugin.Maui.SmartNavigation.Attributes.IgnoreAttribute]
