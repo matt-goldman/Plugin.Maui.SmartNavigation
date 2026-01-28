@@ -45,8 +45,6 @@ namespace Plugin.Maui.SmartNavigation.SourceGenerators
                         return;
                     }
 
-                    var test = mauiProgram.GetAttributes();
-
                     bool hasUseAutoDependenciesAttribute = mauiProgram.GetAttributes()
                         .Any(ad => ad.AttributeClass?.ToDisplayString() == "Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute");
 
