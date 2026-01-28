@@ -1,4 +1,6 @@
 ﻿[*.cs]
 
 # IDE0160: Convert to block scoped namespace
-csharp_style_namespace_declarations = file_scoped
+csharp_style_namespace_declarations                    = file_scoped
+
+csharp_space_after_keywords_in_control_flow_statements = true
