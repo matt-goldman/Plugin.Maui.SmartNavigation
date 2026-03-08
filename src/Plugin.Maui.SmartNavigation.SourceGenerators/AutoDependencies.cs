@@ -33,24 +33,16 @@ namespace Plugin.Maui.SmartNavigation.SourceGenerators
 
                     Log.WriteLine("Getting MauiProgram...");
 
-                    var mauiProgramName = $"{assembly.Name}.MauiProgram";
-
-                    Log.WriteLine($"Global namespace: {compilation.Assembly.GlobalNamespace.Name}");
-
-                    var mauiProgram = compilation.GetTypeByMetadataName(mauiProgramName);
+                    // Find MauiProgram by scanning for the [UseAutoDependencies] attribute
+                    // rather than assuming namespace matches assembly name.
+                    var mauiProgram = types.FirstOrDefault(t =>
+                        t.Name == "MauiProgram" &&
+                        t.GetAttributes().Any(ad =>
+                            ad.AttributeClass?.ToDisplayString() == "Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute"));
 
                     if (mauiProgram is null)
                     {
                         Log.WriteLine("MauiProgram not found");
-                        return;
-                    }
-
-                    bool hasUseAutoDependenciesAttribute = mauiProgram.GetAttributes()
-                        .Any(ad => ad.AttributeClass?.ToDisplayString() == "Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute");
-
-                    if (!hasUseAutoDependenciesAttribute)
-                    {
-                        Log.WriteLine("UseAutoDependenciesAttribute not found, skipping.");
                         return;
                     }
 
