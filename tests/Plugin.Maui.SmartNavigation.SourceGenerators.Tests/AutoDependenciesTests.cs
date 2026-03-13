@@ -1,6 +1,4 @@
-﻿using IeuanWalker.MinimalApi.Endpoints.Generator.Tests;
-
-namespace Plugin.Maui.SmartNavigation.SourceGenerators.Tests;
+﻿namespace Plugin.Maui.SmartNavigation.SourceGenerators.Tests;
 
 public sealed class AutoDependenciesTests
 {

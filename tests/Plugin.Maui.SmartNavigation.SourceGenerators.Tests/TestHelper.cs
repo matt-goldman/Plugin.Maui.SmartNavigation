@@ -1,9 +1,8 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Plugin.Maui.SmartNavigation.SourceGenerators;
 using System.Runtime.CompilerServices;
 
-namespace IeuanWalker.MinimalApi.Endpoints.Generator.Tests;
+namespace Plugin.Maui.SmartNavigation.SourceGenerators.Tests;
 
 public static class TestHelper
 {
