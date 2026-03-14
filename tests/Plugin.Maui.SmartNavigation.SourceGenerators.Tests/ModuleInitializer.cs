@@ -1,0 +1,19 @@
+using System.Runtime.CompilerServices;
+
+namespace Plugin.Maui.SmartNavigation.SourceGenerators.Tests;
+
+public static class ModuleInitializer
+{
+    [ModuleInitializer]
+    public static void Init()
+    {
+        // Initialize Verify settings for source generators
+        VerifySourceGenerators.Initialize();
+    }
+}
+
+public sealed class VerifyChecksTests
+{
+    [Fact]
+    public Task Run() => VerifyChecks.Run();
+}
