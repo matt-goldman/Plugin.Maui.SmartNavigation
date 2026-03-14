@@ -30,7 +30,7 @@ jobs:
       NORELEASE: ${{ steps.check_norelease.outputs.norelease }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -82,7 +82,7 @@ jobs:
       - name: GitHub Tag Bump (Release)
         id: tag_bump_release
         if: env.PRERELEASE == 'false' && env.NORELEASE != 'true'
-        uses: anothrNick/github-tag-action@1.73.0
+        uses: anothrNick/github-tag-action@1.75.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INITIAL_VERSION: 3.0.0
@@ -140,10 +140,10 @@ jobs:
       SOLUTION: '.\Plugin.Maui.SmartNavigation.slnx'
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v6
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 10.0.x
 
@@ -162,7 +162,7 @@ jobs:
         IS_CI_TEST: true
 
     - name: Publish Test Results
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       if: always()
       with:
         name: test-results
@@ -176,7 +176,7 @@ jobs:
 
     - name: Upload Build Artifacts
       if: needs.generate-version.outputs.NORELEASE != 'true'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: build-packages
         path: packages/*.nupkg
@@ -212,10 +212,10 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.x
 
