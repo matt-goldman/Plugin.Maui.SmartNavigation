@@ -352,3 +352,7 @@ MigrationBackup/
 
 .idea/
 /.vscode/settings.json
+
+# Verify
+*.received.*
+*.received/
