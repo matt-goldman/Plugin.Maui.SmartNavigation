@@ -6,6 +6,16 @@ on:
     paths:
       - 'src/**'
   workflow_dispatch:
+    inputs:
+      norelease:
+        description: 'Skip publishing (run tests only)'
+        required: false
+        default: true
+        type: boolean
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
 
 permissions:
   contents: write
@@ -24,8 +34,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set release defaults
+        run: |
+          echo "NORELEASE=true" >> $GITHUB_ENV
+          echo "PRERELEASE=false" >> $GITHUB_ENV
+          echo "BUMP=patch" >> $GITHUB_ENV
+
       - name: Get last merged PR labels
         id: prlabels
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.norelease)
         run: |
           PR=$(gh pr list --state merged --base main --limit 1 --json number --jq '.[0].number')
           LABELS=$(gh pr view $PR --json labels --jq '[.labels[].name]')
@@ -38,33 +55,21 @@ jobs:
             exit 1
           fi
 
-          # Fail if neither preview nor release is set
-          if [[ "$LABELS" != *"preview"* && "$LABELS" != *"release"*  && "$LABELS" != *"norelease"* ]]; then
-            echo "❌ PR must have 'preview', 'release' or 'norelease' label."
-            exit 1
-          fi
-
-          # Set PRERELEASE
+          # Set PRERELEASE and NORELEASE based on labels
+          # If neither preview nor release label is present, NORELEASE stays true (set by defaults step)
           if [[ "$LABELS" == *"preview"* ]]; then
             echo "PRERELEASE=true" >> $GITHUB_ENV
-          else
+            echo "NORELEASE=false" >> $GITHUB_ENV
+          elif [[ "$LABELS" == *"release"* ]]; then
             echo "PRERELEASE=false" >> $GITHUB_ENV
+            echo "NORELEASE=false" >> $GITHUB_ENV
           fi
 
-          # Set bump type
+          # Set bump type (patch is the default set earlier)
           if [[ "$LABELS" == *"Semver-Major"* ]]; then
             echo "BUMP=major" >> $GITHUB_ENV
           elif [[ "$LABELS" == *"Semver-Minor"* ]]; then
             echo "BUMP=minor" >> $GITHUB_ENV
-          else
-            echo "BUMP=patch" >> $GITHUB_ENV
-          fi
-
-          # Set NORELEASE
-          if [[ "$LABELS" == *"norelease"* ]]; then
-            echo "NORELEASE=true" >> $GITHUB_ENV
-          else
-            echo "NORELEASE=false" >> $GITHUB_ENV
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
