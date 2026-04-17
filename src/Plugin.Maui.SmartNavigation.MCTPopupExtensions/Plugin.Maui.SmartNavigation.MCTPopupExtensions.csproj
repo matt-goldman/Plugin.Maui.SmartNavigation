@@ -4,15 +4,16 @@
 		<NetCoreVersion>10.0</NetCoreVersion>
 		<TargetFramework>net$(NetCoreVersion)</TargetFramework>
 		<ImplicitUsings>Enable</ImplicitUsings>
+		<Nullable>Enable</Nullable>
 		<UseMaui>true</UseMaui>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageId>Plugin.Maui.SmartNavigation.MopupsExtensions</PackageId>
-		<Description>Mopups extensions for Plugin.Maui.SmartNavigation - push popup pages with resolved dependencies</Description>
+		<PackageId>Plugin.Maui.SmartNavigation.MCTPopupExtensions</PackageId>
+		<Description>Maui Community Toolkit extensions for Plugin.Maui.SmartNavigation - push popup pages with resolved dependencies</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
-		<PackageReference Include="Mopups" Version="1.3.4" />
 	</ItemGroup>
 
 	<ItemGroup>
