@@ -11,8 +11,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
-		<PackageReference Include="Mopups" Version="1.3.4" />
+		<PackageReference Include="Microsoft.Maui.Controls" />
+		<PackageReference Include="Mopups" />
 	</ItemGroup>
 
 	<ItemGroup>

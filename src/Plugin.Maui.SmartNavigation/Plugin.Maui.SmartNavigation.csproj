@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+<PropertyGroup>
 	<NetCoreVersion>10.0</NetCoreVersion>
 	<TargetFramework>net$(NetCoreVersion)</TargetFramework>
     <UseMaui>true</UseMaui>
@@ -20,8 +20,8 @@
 	<InternalsVisibleTo Include="Plugin.Maui.SmartNavigation.IntegrationTests" />
   </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" />
+  </ItemGroup>
 
 </Project>

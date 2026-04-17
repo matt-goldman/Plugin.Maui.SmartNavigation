@@ -12,8 +12,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
+		<PackageReference Include="CommunityToolkit.Maui" />
+		<PackageReference Include="Microsoft.Maui.Controls" />
 	</ItemGroup>
 
 	<ItemGroup>
