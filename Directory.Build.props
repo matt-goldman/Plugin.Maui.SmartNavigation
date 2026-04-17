@@ -1,24 +1,23 @@
 <Project>
-<!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
-<PropertyGroup>
-  <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-  <Authors>Matt Goldman</Authors>
-  <Company></Company>
-  <RepositoryUrl>https://github.com/matt-goldman/Plugin.Maui.SmartNavigation</RepositoryUrl>
-  <Copyright>Matt Goldman 2025</Copyright>
-  <PackageIcon>icon.png</PackageIcon>
-  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-  <Version>3.0.0</Version>
-</PropertyGroup>
+	<!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
+	<PropertyGroup>
+		<Authors>Matt Goldman</Authors>
+		<Company></Company>
+		<RepositoryUrl>https://github.com/matt-goldman/Plugin.Maui.SmartNavigation</RepositoryUrl>
+		<Copyright>Matt Goldman 2025</Copyright>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Version>3.0.0</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="../../assets/icon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="../../LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="../../assets/icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="../../LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 </Project>
