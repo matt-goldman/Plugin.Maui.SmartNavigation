@@ -80,6 +80,20 @@
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 	</PropertyGroup>-->
 
+	<!--
+		Force the in-process XAML compiler task instead of the external XamlCompiler.exe.
+		When building with `dotnet build` (MSBuildRuntimeType=Core), the Windows App SDK
+		targets default to the external exe, which may be blocked by group policy (AppLocker).
+		Setting this property before MarkupCompilePass1 runs forces the in-process MSBuild task.
+	-->
+	<Target Name="ForceXamlCompilerInProcessTask"
+			BeforeTargets="MarkupCompilePass1;MarkupCompilePass2"
+			Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+		<PropertyGroup>
+			<UseXamlCompilerExecutable>false</UseXamlCompilerExecutable>
+		</PropertyGroup>
+	</Target>
+
 	<ItemGroup>
 		<MauiXaml Update="Pages\AggregateExceptionPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
