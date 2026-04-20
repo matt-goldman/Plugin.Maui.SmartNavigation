@@ -1,4 +1,5 @@
-﻿using DemoProject.Popups.Pages;
+﻿using CommunityToolkit.Maui;
+using DemoProject.Popups.Pages;
 using DemoProject.Popups.ViewModels;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
@@ -14,7 +15,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

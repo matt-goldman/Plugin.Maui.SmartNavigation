@@ -63,6 +63,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" />
 		<PackageReference Include="CommunityToolkit.Mvvm" />
 		<PackageReference Include="Microsoft.Maui.Controls" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" />
@@ -86,9 +87,7 @@
 		targets default to the external exe, which may be blocked by group policy (AppLocker).
 		Setting this property before MarkupCompilePass1 runs forces the in-process MSBuild task.
 	-->
-	<Target Name="ForceXamlCompilerInProcessTask"
-			BeforeTargets="MarkupCompilePass1;MarkupCompilePass2"
-			Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+	<Target Name="ForceXamlCompilerInProcessTask" BeforeTargets="MarkupCompilePass1;MarkupCompilePass2" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
 		<PropertyGroup>
 			<UseXamlCompilerExecutable>false</UseXamlCompilerExecutable>
 		</PropertyGroup>
