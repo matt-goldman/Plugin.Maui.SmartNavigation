@@ -7,8 +7,19 @@ public partial class MctPopupsMainPage : ContentPage
 		InitializeComponent();
 	}
 
-    private void OnMessagePopup_Clicked(object sender, EventArgs e)
+    private async void OnMessagePopup_Clicked(object sender, EventArgs e)
     {
+        try
+        {
+            await Navigation.PushAsync<MessagePopup>(null, CancellationToken.None, new MessagePopupModel
+            {
+                Title = "Test message popup title",
+                Message = "Test message popup message"
+            });
+        }
+        catch (Exception ex)
+        {
 
+        }
     }
 }
