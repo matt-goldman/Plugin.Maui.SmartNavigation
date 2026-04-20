@@ -22,4 +22,16 @@ public partial class MctPopupsMainPage : ContentPage
 
         }
     }
+
+    private async void OnAddPopup_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            await Navigation.PushAsync<AddPopup>(null, CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
 }
