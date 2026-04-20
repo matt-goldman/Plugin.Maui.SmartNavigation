@@ -122,6 +122,9 @@
 		<MauiXaml Update="Popups\Pages\Mct\MessagePopup.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Popups\Pages\Mct\ReturnObjectPopup.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>
