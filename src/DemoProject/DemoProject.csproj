@@ -75,6 +75,7 @@
 		<ProjectReference Include="..\Plugin.Maui.SmartNavigation.SourceGenerators\Plugin.Maui.SmartNavigation.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 		<ProjectReference Include="..\Plugin.Maui.SmartNavigation\Plugin.Maui.SmartNavigation.csproj" />
 		<ProjectReference Include="..\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj" />
+		<ProjectReference Include="..\Plugin.Maui.SmartNavigation.MCTPopupExtensions\Plugin.Maui.SmartNavigation.MCTPopupExtensions.csproj" />
 	</ItemGroup>
 
 	<!--<PropertyGroup>
