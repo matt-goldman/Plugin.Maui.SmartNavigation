@@ -83,6 +83,13 @@
                     Text="INavigationManager &amp; Lifecycle Demo"
                     TextColor="White" />
 
+            <Button Command="{Binding ShowMctPopupsCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Shows Mct Popups main page"
+                    Text="Mct Popups"
+                    TextColor="White" />
+
             <Image HeightRequest="310"
                    HorizontalOptions="Center"
                    SemanticProperties.Description="Cute dot net bot waving hi to you!"

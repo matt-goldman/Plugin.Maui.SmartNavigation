@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using DemoProject.Pages;
 using DemoProject.Popups.Pages;
+using DemoProject.Popups.Pages.Mct;
 using Mopups.Services;
 using Plugin.Maui.SmartNavigation.Extensions;
 using System.Diagnostics;
@@ -84,5 +85,11 @@ public partial class MainViewModel(INameService nameService) : BaseViewModel
     private async Task GoToNavigationManagerDemo()
     {
         await Navigation.PushAsync<NavigationManagerDemoPage>();
+    }
+
+    [RelayCommand]
+    private async Task ShowMctPopups()
+    {
+        await Navigation.PushAsync<MctPopupsMainPage>();
     }
 }
