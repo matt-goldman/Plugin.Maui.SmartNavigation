@@ -15,7 +15,24 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkit(options =>
+            {
+                options.SetPopupDefaults(new DefaultPopupSettings
+                {
+                    Margin = 0,
+                    Padding = 0,
+                    VerticalOptions = LayoutOptions.Fill,
+                    HorizontalOptions = LayoutOptions.Fill,
+                    BackgroundColor = Colors.Transparent,
+                    //CanBeDismissedByTappingOutsideOfPopup = false
+                });
+                options.SetPopupOptionsDefaults(new DefaultPopupOptionsSettings
+                {
+                    PageOverlayColor = Color.FromArgb("99000000"),
+                    Shape = null,
+                    Shadow = null
+                });
+            })
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
