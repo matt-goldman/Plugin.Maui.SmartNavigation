@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+x:Class="DemoProject.Popups.Pages.Mct.BasePopup"
+xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    SafeAreaEdges="None"
+    VerticalOptions="Fill">
+
+    <Grid
+        Padding="20"
+        HorizontalOptions="Fill"
+        SafeAreaEdges="None"
+        VerticalOptions="Fill">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+        </Grid.GestureRecognizers>
+
+        <Border
+            x:Name="Container"
+            Margin="10"
+            BackgroundColor="{AppThemeBinding Light=White,
+                                              Dark=#1C1C1E}"
+            HorizontalOptions="Fill"
+            StrokeThickness="0"
+            VerticalOptions="Center">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+            </Border.StrokeShape>
+            <ScrollView VerticalOptions="Start">
+                <Grid
+                    ColumnDefinitions="*,70"
+                    ColumnSpacing="10"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="10">
+                    <!--  Title  -->
+                    <Label
+                        x:Name="LblTitle"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="20,10,0,0"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        VerticalTextAlignment="End" />
+
+                    <!--  Close Button  -->
+                    <Button
+                        x:Name="BtnClose"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,10,15,0"
+                        BackgroundColor="Transparent"
+                        Clicked="BtnClose_OnClicked"
+                        CornerRadius="20"
+                        FontSize="16"
+                        HeightRequest="40"
+                        Text="✕"
+                        TextColor="{AppThemeBinding Light=Black,
+                                                    Dark=White}"
+                        VerticalOptions="Start"
+                        WidthRequest="40" />
+
+                    <!--  Content  -->
+                    <ContentView
+                        x:Name="BaseContent"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        AutomationProperties.IsInAccessibleTree="False" />
+                </Grid>
+            </ScrollView>
+        </Border>
+    </Grid>
+</mct:Popup>
