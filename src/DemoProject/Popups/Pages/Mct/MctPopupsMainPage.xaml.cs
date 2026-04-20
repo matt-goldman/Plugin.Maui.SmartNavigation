@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Core;
+using DemoProject.Popups.Pages.Mct.Loader;
 
 namespace DemoProject.Popups.Pages.Mct;
 
@@ -35,6 +36,11 @@ public partial class MctPopupsMainPage : ContentPage
         {
 
         }
+    }
+
+    private async void OnLoadingPopups_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new LoadingPopups());
     }
 
     private async void OnReturnObjectPopup_Clicked(object sender, EventArgs e)

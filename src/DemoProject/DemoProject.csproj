@@ -116,6 +116,12 @@
 		<MauiXaml Update="Popups\Pages\Mct\BasePopup.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Popups\Pages\Mct\Loader\LoadingPopup.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Popups\Pages\Mct\Loader\LoadingPopups.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Popups\Pages\Mct\MctPopupsMainPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
