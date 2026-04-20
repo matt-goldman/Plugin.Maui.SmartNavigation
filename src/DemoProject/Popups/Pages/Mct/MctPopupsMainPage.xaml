@@ -10,6 +10,10 @@
             <Button Clicked="OnMessagePopup_Clicked"
                     HorizontalOptions="Fill"
                     Text="Message Popup" />
+
+            <Button Clicked="OnAddPopup_Clicked"
+                    HorizontalOptions="Fill"
+                    Text="Add Popup" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

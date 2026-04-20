@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:BasePopup x:Class="DemoProject.Popups.Pages.Mct.AddPopup"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:mct="clr-namespace:DemoProject.Popups.Pages.Mct"
+                       PopupTitle="Property"
+                       PopupVerticalOptions="Start">
+    <mct:BasePopup.BasePopupContent>
+        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+
+            <!-- Days Before picker -->
+            <Border Grid.Row="0"
+                    Margin="15,0"
+                    Padding="5"
+                    Stroke="{StaticResource Gray200}"
+                    StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="6" />
+                </Border.StrokeShape>
+                <Picker Title="When" SelectedIndex="1">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>On the day</x:String>
+                            <x:String>1 day before</x:String>
+                            <x:String>2 days before</x:String>
+                            <x:String>3 days before</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Border>
+
+            <!-- Time picker -->
+            <Border Grid.Row="1"
+                    Margin="15,0"
+                    Padding="5"
+                    Stroke="{StaticResource Gray200}"
+                    StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="6" />
+                </Border.StrokeShape>
+                <VerticalStackLayout>
+                    <Label Margin="5,5,0,0"
+                           FontSize="12"
+                           Text="Time"
+                           TextColor="{StaticResource Gray400}" />
+                    <TimePicker Time="07:00:00" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Create Reminder button -->
+            <Button Grid.Row="2"
+                    Margin="15,0,15,15"
+                    BackgroundColor="{StaticResource Primary}"
+                    CornerRadius="6"
+                    Text="💾 Create Reminder"
+                    TextColor="White" />
+
+        </Grid>
+    </mct:BasePopup.BasePopupContent>
+</mct:BasePopup>
