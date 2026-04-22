@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mopups:PopupPage
-    x:Class="DemoProject.Popups.Pages.EasyPopup"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-    xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels"
-    Title="EasyPopup"
-    x:DataType="vm:PopupViewModel"
-    BackgroundColor="#80000000">
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels"
+                  x:DataType="vm:PopupViewModel"
+                  x:Class="DemoProject.Popups.Pages.EasyPopup"
+                  BackgroundColor="#80000000"
+                  Title="EasyPopup">
     <Border
-        Margin="70,0"
-        Padding="10"
-        BackgroundColor="{StaticResource Magenta}"
         HorizontalOptions="Center"
+        VerticalOptions="Center"
         MinimumHeightRequest="300"
         MinimumWidthRequest="300"
+        Padding="10"
+        Margin="70,0"
         Stroke="{StaticResource Magenta}"
         StrokeShape="RoundRectangle 8"
-        VerticalOptions="Center">
+        BackgroundColor="{StaticResource Magenta}">
         <VerticalStackLayout>
-            <Label
-                HorizontalOptions="Center"
-                Text="{Binding Message}"
-                VerticalOptions="Center" />
+            <Label 
+            Text="{Binding Message}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
         </VerticalStackLayout>
     </Border>
 </mopups:PopupPage>
