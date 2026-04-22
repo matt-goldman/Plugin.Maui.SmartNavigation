@@ -6,7 +6,7 @@
     xmlns:mct="clr-namespace:DemoProject.Popups.Pages.Mct"
     xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels"
     x:DataType="vm:PopupViewModel"
-    BackgroundColor="#80000000">
+    Color="#80000000">
     <Border
         Margin="70,0"
         Padding="10"
