@@ -4,8 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mct="clr-namespace:DemoProject.Popups.Pages.Mct"
-    xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels"
-    Color="#80000000">
+    xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels">
     <Border
         Margin="70,0"
         Padding="10"
