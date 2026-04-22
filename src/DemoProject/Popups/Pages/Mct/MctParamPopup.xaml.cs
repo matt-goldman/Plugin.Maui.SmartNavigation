@@ -4,7 +4,7 @@ namespace DemoProject.Popups.Pages.Mct;
 
 public partial class MctParamPopup : BasePopup
 {
-	public MctParamPopup(ParamPopupViewModel viewModel)
+    public MctParamPopup(ParamPopupViewModel viewModel)
     {
         InitializeComponent();
 
