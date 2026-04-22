@@ -93,6 +93,11 @@
 			<UseXamlCompilerExecutable>false</UseXamlCompilerExecutable>
 		</PropertyGroup>
 	</Target>
+	<ItemGroup>
+	  <Compile Update="Popups\Pages\Mct\MctEasyPopup.xaml.cs">
+	    <DependentUpon>MctEasyPopup.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 
 	<ItemGroup>
 		<MauiXaml Update="Pages\AggregateExceptionPage.xaml">
@@ -114,6 +119,9 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Popups\Pages\Mct\BasePopup.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Popups\Pages\Mct\MctEasyPopup.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Popups\Pages\Mct\Loader\LoadingPopup.xaml">
