@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-<PropertyGroup>
-	<TargetFramework>netstandard2.0</TargetFramework>
-	<Authors>Matt Goldman</Authors>
-	<Company />
-	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageId>Plugin.Maui.SmartNavigation.SourceGenerator</PackageId>
-	<Description>Source generators used by Plugin.Maui.SmartNavigation</Description>
-	<EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
-</PropertyGroup>
-
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <Authors>Matt Goldman</Authors>
+	  <Company />
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageId>Plugin.Maui.SmartNavigation.SourceGenerator</PackageId>
+	  <Description>Source generators used by Plugin.Maui.SmartNavigation</Description>
+	  <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
+  </PropertyGroup>
+	
 	<ItemGroup>
 	  <None Remove="bin\Debug\netstandard2.0\\Plugin.Maui.SmartNavigation.SourceGenerators.dll" />
 	</ItemGroup>
