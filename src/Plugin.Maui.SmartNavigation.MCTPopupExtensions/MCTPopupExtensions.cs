@@ -31,11 +31,4 @@ public static class MCTPopupExtensions
 
         return navigation.ShowPopupAsync<TResult>(popup, options, cancellationToken);
     }
-    //public static Task<IPopupResult<TResult>> PushAsync<T, TResult>(this IPopupService popupService, IPopupOptions? options, CancellationToken cancellationToken, params object[] parameters) where T : Page
-    //{
-    //    var popup = NavigationExtensions.ResolvePage<T>(parameters) as Page
-    //      ?? throw new ArgumentException("Could not resolve popup page");
-
-    //    return popupService.ShowPopupAsync<T, TResult>(popup, options, cancellationToken);
-    //}
 }
