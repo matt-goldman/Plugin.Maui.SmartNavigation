@@ -71,6 +71,11 @@ public partial class MctPopupsMainPage : ContentPage
         await Navigation.PushAsync<MctEasyPopup>(null, CancellationToken.None);
     }
 
+    private async void OnMctParamPopup_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync<MctParamPopup>(null, CancellationToken.None, "It's alive!");
+    }
+
     public class TestObject
     {
         public int Id { get; set; }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mopups:PopupPage
-    x:Class="DemoProject.Popups.Pages.EasyPopup"
+<mct:BasePopup
+    x:Class="DemoProject.Popups.Pages.Mct.MctParamPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+    xmlns:mct="clr-namespace:DemoProject.Popups.Pages.Mct"
     xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels"
-    Title="EasyPopup"
-    x:DataType="vm:PopupViewModel"
-    BackgroundColor="#80000000">
+    Color="#80000000">
     <Border
         Margin="70,0"
         Padding="10"
@@ -25,4 +23,4 @@
                 VerticalOptions="Center" />
         </VerticalStackLayout>
     </Border>
-</mopups:PopupPage>
+</mct:BasePopup>

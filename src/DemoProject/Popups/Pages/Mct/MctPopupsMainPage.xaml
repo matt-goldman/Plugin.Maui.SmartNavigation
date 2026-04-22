@@ -28,11 +28,19 @@
                 HorizontalOptions="Fill"
                 Text="Loading Popups" />
 
-            <Button Clicked="OnEasyPopup_Clicked"
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"
-                    SemanticProperties.Hint="Shows a resolved popup"
-                    Text="Click to show popup with resolved dependncy" />
+            <Button
+                Clicked="OnEasyPopup_Clicked"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Shows a resolved popup"
+                Text="Click to show popup with resolved dependncy" />
+
+            <Button
+                Clicked="OnMctParamPopup_Clicked"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Shows a resolved popup"
+                Text="Click to show popup with resolved dependncy" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
