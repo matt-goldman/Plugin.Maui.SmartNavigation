@@ -66,6 +66,11 @@ public partial class MctPopupsMainPage : ContentPage
         }
     }
 
+    private async void OnEasyPopup_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync<MctEasyPopup>(null, CancellationToken.None);
+    }
+
     public class TestObject
     {
         public int Id { get; set; }
