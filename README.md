@@ -70,6 +70,20 @@ await _navigation.PushModalAsync<SettingsPage>();
 await _navigation.PopModalAsync();
 ```
 
+### Desktop windows
+
+```csharp
+var window = App.Current?.OpenNewWindow<DetailsPage>();
+```
+
+With constructor parameters (for page or mapped ViewModel):
+
+```csharp
+var window = App.Current?.OpenNewWindow<DetailsPage>("parameter value");
+```
+
+`OpenNewWindow<TPage>` resolves pages through DI in the same way as stack/modal navigation, including registered ViewModels.
+
 ### Shell routing (type-safe)
 
 ```csharp
