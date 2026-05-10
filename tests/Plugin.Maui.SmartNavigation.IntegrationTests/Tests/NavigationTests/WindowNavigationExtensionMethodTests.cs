@@ -43,7 +43,10 @@ public class WindowNavigationExtensionMethodTests
             .ToArray();
 
         methods.Length.ShouldBe(2);
-        methods.ShouldContain(m => m.GetParameters().Length == 1 && m.GetParameters()[0].ParameterType == typeof(Application));
+        methods.ShouldContain(m =>
+            m.GetParameters().Length == 1
+            && m.GetParameters()[0].ParameterType == typeof(Application)
+            && m.GetGenericArguments().Length == 1);
     }
 
     [Fact]
@@ -57,6 +60,7 @@ public class WindowNavigationExtensionMethodTests
         methods.ShouldContain(m =>
             m.GetParameters().Length == 2
             && m.GetParameters()[0].ParameterType == typeof(Application)
-            && m.GetParameters()[1].ParameterType == typeof(object[]));
+            && m.GetParameters()[1].ParameterType == typeof(object[])
+            && m.GetGenericArguments().Length == 1);
     }
 }

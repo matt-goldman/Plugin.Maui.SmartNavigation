@@ -88,7 +88,7 @@ public static class NavigationExtensions
         return application.OpenWindow<T>();
     }
 
-    #endregion paramaterless navigation
+    #endregion parameterless navigation
 
     #region parameterized navigation
 
