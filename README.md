@@ -259,6 +259,32 @@ The demo project shows:
 
 See: `src/DemoProject`
 
+## Contributor Notes: MopupsExtensions Local Dev
+
+`Plugin.Maui.SmartNavigation.MopupsExtensions` can consume `Plugin.Maui.SmartNavigation` in two modes:
+
+* **Default (local dev):** uses a `ProjectReference` to the in-repo project so local changes are picked up automatically.
+* **Package validation / CI publish:** uses a `PackageReference` when `PluginMauiSmartNavigationVersion` is provided.
+
+### Local development (frictionless default)
+
+No extra setup is required. Build as normal:
+
+```powershell
+dotnet build src\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj -c Release
+```
+
+### Validate against a published package version
+
+Pass the version explicitly:
+
+```powershell
+dotnet build src\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj -c Release -p:PluginMauiSmartNavigationVersion=3.0.0
+dotnet pack src\Plugin.Maui.SmartNavigation.MopupsExtensions\Plugin.Maui.SmartNavigation.MopupsExtensions.csproj -c Release --no-build -p:PluginMauiSmartNavigationVersion=3.0.0
+```
+
+CI follows this same explicit-version path for publishing.
+
 ## Video Walkthrough
 
 **Note:** This is for the legacy version. New video coming soon.
