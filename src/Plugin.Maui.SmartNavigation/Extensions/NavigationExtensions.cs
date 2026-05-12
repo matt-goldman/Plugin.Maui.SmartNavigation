@@ -9,7 +9,7 @@ namespace Plugin.Maui.SmartNavigation.Extensions;
 
 public static class NavigationExtensions
 {
-    #region paramaterless navigation
+    #region parameterless navigation
 
     /// <summary>
     /// Resolves a page of type T (must inherit from Page) and pushes a new instance onto the navigation stack
