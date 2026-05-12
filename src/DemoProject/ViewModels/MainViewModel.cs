@@ -87,8 +87,8 @@ public partial class MainViewModel(INameService nameService) : BaseViewModel
     }
 
     [RelayCommand]
-    private async Task OpenWindow()
+    private void OpenWindow()
     {
-        App.Current?.OpenWindow<VmParamPage>("New Window");
+        Application.Current?.OpenWindow<VmParamPage>("New Window");
     }
 }
