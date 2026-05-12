@@ -83,6 +83,13 @@
                     Text="INavigationManager &amp; Lifecycle Demo"
                     TextColor="White" />
 
+            <Button Command="{Binding OpenWindowCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Opens a new window"
+                    Text="Open window with injected dependencies"
+                    IsEnabled="{OnIdiom Desktop=True, Default=False}"/>
+
             <Image HeightRequest="310"
                    HorizontalOptions="Center"
                    SemanticProperties.Description="Cute dot net bot waving hi to you!"

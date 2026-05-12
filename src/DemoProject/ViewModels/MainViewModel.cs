@@ -85,4 +85,10 @@ public partial class MainViewModel(INameService nameService) : BaseViewModel
     {
         await Navigation.PushAsync<NavigationManagerDemoPage>();
     }
+
+    [RelayCommand]
+    private void OpenWindow()
+    {
+        Application.Current?.OpenWindow<VmParamPage>("New Window");
+    }
 }
