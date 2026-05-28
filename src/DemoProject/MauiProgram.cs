@@ -1,4 +1,6 @@
-﻿using DemoProject.Popups.Pages;
+﻿using CommunityToolkit.Maui;
+using DemoProject.Popups.Pages;
+using DemoProject.Popups.Pages.Mct;
 using DemoProject.Popups.ViewModels;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
@@ -9,28 +11,49 @@ namespace DemoProject;
 [UseAutoDependencies]
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			})
-			.ConfigureMopups()
-			.UseAutodependencies();
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit(options =>
+            {
+                options.SetPopupDefaults(new DefaultPopupSettings
+                {
+                    Margin = 0,
+                    Padding = 0,
+                    VerticalOptions = LayoutOptions.Fill,
+                    HorizontalOptions = LayoutOptions.Fill,
+                    BackgroundColor = Colors.Transparent,
+                    //CanBeDismissedByTappingOutsideOfPopup = false
+                });
+                options.SetPopupOptionsDefaults(new DefaultPopupOptionsSettings
+                {
+                    PageOverlayColor = Color.FromArgb("99000000"),
+                    Shape = null,
+                    Shadow = null
+                });
+            })
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            })
+            .ConfigureMopups()
+            .UseAutodependencies();
 
-			builder.Services.AddTransient<EasyPopup>();
-			builder.Services.AddTransient<ParamPopup>();
+        builder.Services.AddTransient<EasyPopup>();
+        builder.Services.AddTransient<ParamPopup>();
 
-			StartupExtensions.UpsertViewModelMapping<ParamPopup, ParamPopupViewModel>();
+        StartupExtensions.UpsertViewModelMapping<ParamPopup, ParamPopupViewModel>();
+
+        builder.Services.AddTransient<MctParamPopup>();
+        StartupExtensions.UpsertViewModelMapping<MctParamPopup, ParamPopupViewModel>();
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
-	}
+        return builder.Build();
+    }
 }

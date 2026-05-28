@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Plugin.Maui.SmartNavigation.Services;
 using System;
@@ -102,7 +103,7 @@ public static class NavigationExtensions
     public static async Task PushAsync<T>(this INavigation navigation, params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        await navigation.PushAsync(page);
+        await navigation.PushAsync(page as Page);
     }
 
     /// <summary>
@@ -115,7 +116,7 @@ public static class NavigationExtensions
     public static async Task PushModalAsync<T>(this INavigation navigation, params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        await navigation.PushModalAsync(page);
+        await navigation.PushModalAsync(page as Page);
     }
 
     /// <summary>
@@ -128,7 +129,7 @@ public static class NavigationExtensions
     public static void InsertPageBefore<T>(this INavigation navigation, Page before, params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        navigation.InsertPageBefore(page, before);
+        navigation.InsertPageBefore(page as Page, before);
     }
 
     /// <summary>
@@ -139,7 +140,7 @@ public static class NavigationExtensions
     public static Window CreateWindow<T>(params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        return new Window(page);
+        return new Window(page as Page);
     }
 
     /// <summary>
@@ -176,7 +177,7 @@ public static class NavigationExtensions
 
     #endregion parameterized navigation
 
-    internal static Page ResolvePage<T>(params object[] parameters) where T : Page
+    internal static IView ResolvePage<T>(params object[] parameters) where T : IView
     {
         var serviceProvider = Resolver.GetServiceProvider();
 
@@ -196,12 +197,12 @@ public static class NavigationExtensions
         return CreatePageWithViewModel<T>(serviceProvider, viewModelType, parameters);
     }
 
-    private static Page CreatePageWithoutViewModel<T>(IServiceProvider serviceProvider, params object[] parameters) where T : Page
+    private static IView CreatePageWithoutViewModel<T>(IServiceProvider serviceProvider, params object[] parameters) where T : IView
     {
         return ActivatorUtilities.CreateInstance<T>(serviceProvider, parameters);
     }
 
-    private static Page CreatePageWithViewModel<T>(IServiceProvider serviceProvider, Type viewModelType, params object[] parameters) where T : Page
+    private static IView CreatePageWithViewModel<T>(IServiceProvider serviceProvider, Type viewModelType, params object[] parameters) where T : IView
     {
         // Check if parameters fit the ViewModel's constructors
         if (ParametersMatchConstructors(viewModelType, parameters))
@@ -270,7 +271,7 @@ public static class NavigationExtensions
         return false;
     }
 
-    private static Page CreatePageUsingViewModel<T>(IServiceProvider serviceProvider, object viewModel) where T : Page
+    private static IView CreatePageUsingViewModel<T>(IServiceProvider serviceProvider, object viewModel) where T : IView
     {
         try
         {

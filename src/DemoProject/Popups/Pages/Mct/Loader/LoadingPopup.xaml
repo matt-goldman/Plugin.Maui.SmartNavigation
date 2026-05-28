@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup x:Class="DemoProject.Popups.Pages.Mct.Loader.LoadingPopup"
+               xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               CanBeDismissedByTappingOutsideOfPopup="False"
+               Color="Transparent">
+
+    <Grid Padding="20"
+          HorizontalOptions="Fill"
+          SafeAreaEdges="None"
+          VerticalOptions="Fill">
+        <Border Margin="10"
+                BackgroundColor="White"
+                HorizontalOptions="Center"
+                StrokeThickness="0"
+                VerticalOptions="Center">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <VerticalStackLayout Padding="20">
+                <ActivityIndicator IsRunning="True" />
+                <Label x:Name="LoadingLbl"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</toolkit:Popup>

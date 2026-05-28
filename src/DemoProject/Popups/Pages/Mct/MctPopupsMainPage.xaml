@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DemoProject.Popups.Pages.Mct.MctPopupsMainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="MctPopupsMainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+
+            <Button
+                Clicked="OnMessagePopup_Clicked"
+                HorizontalOptions="Fill"
+                Text="Message Popup" />
+
+            <Button
+                Clicked="OnAddPopup_Clicked"
+                HorizontalOptions="Fill"
+                Text="Add Popup" />
+
+            <Button
+                Clicked="OnReturnObjectPopup_Clicked"
+                HorizontalOptions="Fill"
+                Text="Return Object Popup" />
+
+            <Button
+                Clicked="OnLoadingPopups_Clicked"
+                HorizontalOptions="Fill"
+                Text="Loading Popups" />
+
+            <Button
+                Clicked="OnEasyPopup_Clicked"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Shows a resolved popup"
+                Text="Click to show popup with resolved dependncy" />
+
+            <Button
+                Clicked="OnMctParamPopup_Clicked"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Shows a resolved popup"
+                Text="Click to show popup with resolved dependncy" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

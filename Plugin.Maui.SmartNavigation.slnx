@@ -1,10 +1,12 @@
 <Solution>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Plugin.Maui.SmartNavigation.Attributes/Plugin.Maui.SmartNavigation.Attributes.csproj" />
+    <Project Path="src/Plugin.Maui.SmartNavigation.MCTPopupExtensions/Plugin.Maui.SmartNavigation.MCTPopupExtensions.csproj" />
     <Project Path="src/Plugin.Maui.SmartNavigation.MopupsExtensions/Plugin.Maui.SmartNavigation.MopupsExtensions.csproj" />
     <Project Path="src/Plugin.Maui.SmartNavigation.SourceGenerators/Plugin.Maui.SmartNavigation.SourceGenerators.csproj" />
     <Project Path="src/Plugin.Maui.SmartNavigation/Plugin.Maui.SmartNavigation.csproj" />
@@ -13,5 +15,7 @@
     <Project Path="tests/Plugin.Maui.SmartNavigation.IntegrationTests/Plugin.Maui.SmartNavigation.IntegrationTests.csproj" />
     <Project Path="tests/Plugin.Maui.SmartNavigation.SourceGenerators.Tests/Plugin.Maui.SmartNavigation.SourceGenerators.Tests.csproj" Id="08941201-d6d2-492d-bfc3-ff7b51baab8f" />
   </Folder>
-  <Project Path="src/DemoProject/DemoProject.csproj" />
+  <Project Path="src/DemoProject/DemoProject.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
