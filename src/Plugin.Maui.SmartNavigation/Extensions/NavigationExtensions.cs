@@ -10,7 +10,7 @@ namespace Plugin.Maui.SmartNavigation.Extensions;
 
 public static class NavigationExtensions
 {
-    #region paramaterless navigation
+    #region parameterless navigation
 
     /// <summary>
     /// Resolves a page of type T (must inherit from Page) and pushes a new instance onto the navigation stack
@@ -61,6 +61,15 @@ public static class NavigationExtensions
     }
 
     /// <summary>
+    /// Creates a new window with a resolved page of type T (must inherit from Page)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public static Window CreateNewWindow<T>() where T : Page
+    {
+        return CreateWindow<T>();
+    }
+
+    /// <summary>
     /// Creates a new window with a resolved page of type T (must inherit from Page) and opens it, and returns the window
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -71,7 +80,16 @@ public static class NavigationExtensions
         return window;
     }
 
-    #endregion paramaterless navigation
+    /// <summary>
+    /// Creates a new window with a resolved page of type T (must inherit from Page) and opens it, and returns the window
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public static Window OpenNewWindow<T>(this Application application) where T : Page
+    {
+        return application.OpenWindow<T>();
+    }
+
+    #endregion parameterless navigation
 
     #region parameterized navigation
 
@@ -126,6 +144,16 @@ public static class NavigationExtensions
     }
 
     /// <summary>
+    /// Creates a new window with a resolved page of type T (must inherit from Page)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="parameters">The constructor parameters expected by the page to be resolved</param>
+    public static Window CreateNewWindow<T>(params object[] parameters) where T : Page
+    {
+        return CreateWindow<T>(parameters);
+    }
+
+    /// <summary>
     /// Creates a new window with a resolved page of type T (must inherit from Page) and opens it, and returns the window
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -135,6 +163,16 @@ public static class NavigationExtensions
         var window = CreateWindow<T>(parameters);
         application.OpenWindow(window);
         return window;
+    }
+
+    /// <summary>
+    /// Creates a new window with a resolved page of type T (must inherit from Page) and opens it, and returns the window
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="parameters">The constructor parameters expected by the page to be resolved</param>
+    public static Window OpenNewWindow<T>(this Application application, params object[] parameters) where T : Page
+    {
+        return application.OpenWindow<T>(parameters);
     }
 
     #endregion parameterized navigation

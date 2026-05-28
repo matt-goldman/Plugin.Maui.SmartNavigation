@@ -88,6 +88,12 @@ public partial class MainViewModel(INameService nameService) : BaseViewModel
     }
 
     [RelayCommand]
+    private void OpenWindow()
+    {
+        Application.Current?.OpenWindow<VmParamPage>("New Window");
+    }
+
+    [RelayCommand]
     private async Task ShowMctPopups()
     {
         await Navigation.PushAsync<MctPopupsMainPage>();
