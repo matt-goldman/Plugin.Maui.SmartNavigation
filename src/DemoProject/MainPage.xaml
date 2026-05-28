@@ -83,6 +83,13 @@
                     Text="INavigationManager &amp; Lifecycle Demo"
                     TextColor="White" />
 
+            <Button Command="{Binding OpenWindowCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Opens a new window"
+                    Text="Open window with injected dependencies"
+                    IsEnabled="{OnIdiom Desktop=True, Default=False}"/>
+
             <Button Command="{Binding ShowMctPopupsCommand}"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
