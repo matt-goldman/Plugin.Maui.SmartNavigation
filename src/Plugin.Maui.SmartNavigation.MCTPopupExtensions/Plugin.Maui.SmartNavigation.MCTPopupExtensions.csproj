@@ -8,6 +8,7 @@
 		<UseMaui>true</UseMaui>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Plugin.Maui.SmartNavigation.MCTPopupExtensions</PackageId>
+		<Authors>Kyle Cuthbert, Ieuan Walker</Authors>
 		<Description>Maui Community Toolkit extensions for Plugin.Maui.SmartNavigation - push popup pages with resolved dependencies</Description>
 	</PropertyGroup>
 
