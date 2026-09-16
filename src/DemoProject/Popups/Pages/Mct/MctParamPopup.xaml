@@ -13,13 +13,18 @@
         MinimumHeightRequest="300"
         MinimumWidthRequest="300"
         Stroke="{StaticResource Magenta}"
-        StrokeShape="RoundRectangle 8"
-        VerticalOptions="Center">
-        <VerticalStackLayout>
+        StrokeShape="RoundRectangle 8">
+        <VerticalStackLayout VerticalOptions="Fill"
+                             HeightRequest="300">
             <Label
                 HorizontalOptions="Center"
                 Text="{Binding Message}"
                 VerticalOptions="Center" />
+            
+            <Button HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Text="Close"
+                    Clicked="OnCloseClicked" />
         </VerticalStackLayout>
     </Border>
 </mct:BasePopup>

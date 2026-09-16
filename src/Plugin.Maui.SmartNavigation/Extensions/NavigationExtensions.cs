@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Plugin.Maui.SmartNavigation.Services;
 using System;
@@ -103,7 +102,7 @@ public static class NavigationExtensions
     public static async Task PushAsync<T>(this INavigation navigation, params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        await navigation.PushAsync(page as Page);
+        await navigation.PushAsync(page);
     }
 
     /// <summary>
@@ -116,7 +115,7 @@ public static class NavigationExtensions
     public static async Task PushModalAsync<T>(this INavigation navigation, params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        await navigation.PushModalAsync(page as Page);
+        await navigation.PushModalAsync(page);
     }
 
     /// <summary>
@@ -129,7 +128,7 @@ public static class NavigationExtensions
     public static void InsertPageBefore<T>(this INavigation navigation, Page before, params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        navigation.InsertPageBefore(page as Page, before);
+        navigation.InsertPageBefore(page, before);
     }
 
     /// <summary>
@@ -140,17 +139,7 @@ public static class NavigationExtensions
     public static Window CreateWindow<T>(params object[] parameters) where T : Page
     {
         var page = ResolvePage<T>(parameters);
-        return new Window(page as Page);
-    }
-
-    /// <summary>
-    /// Creates a new window with a resolved page of type T (must inherit from Page)
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="parameters">The constructor parameters expected by the page to be resolved</param>
-    public static Window CreateNewWindow<T>(params object[] parameters) where T : Page
-    {
-        return CreateWindow<T>(parameters);
+        return new Window(page);
     }
 
     /// <summary>
@@ -187,7 +176,7 @@ public static class NavigationExtensions
 
     #endregion parameterized navigation
 
-    internal static IView ResolvePage<T>(params object[] parameters) where T : IView
+    internal static T ResolvePage<T>(params object[] parameters) where T : class
     {
         var serviceProvider = Resolver.GetServiceProvider();
 
@@ -207,12 +196,12 @@ public static class NavigationExtensions
         return CreatePageWithViewModel<T>(serviceProvider, viewModelType, parameters);
     }
 
-    private static IView CreatePageWithoutViewModel<T>(IServiceProvider serviceProvider, params object[] parameters) where T : IView
+    private static T CreatePageWithoutViewModel<T>(IServiceProvider serviceProvider, params object[] parameters) where T : class
     {
         return ActivatorUtilities.CreateInstance<T>(serviceProvider, parameters);
     }
 
-    private static IView CreatePageWithViewModel<T>(IServiceProvider serviceProvider, Type viewModelType, params object[] parameters) where T : IView
+    private static T CreatePageWithViewModel<T>(IServiceProvider serviceProvider, Type viewModelType, params object[] parameters) where T : class
     {
         // Check if parameters fit the ViewModel's constructors
         if (ParametersMatchConstructors(viewModelType, parameters))
@@ -281,7 +270,7 @@ public static class NavigationExtensions
         return false;
     }
 
-    private static IView CreatePageUsingViewModel<T>(IServiceProvider serviceProvider, object viewModel) where T : IView
+    private static T CreatePageUsingViewModel<T>(IServiceProvider serviceProvider, object viewModel) where T : class
     {
         try
         {

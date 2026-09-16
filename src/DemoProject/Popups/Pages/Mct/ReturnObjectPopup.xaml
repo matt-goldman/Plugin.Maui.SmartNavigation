@@ -3,7 +3,9 @@
     x:Class="DemoProject.Popups.Pages.Mct.ReturnObjectPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:local="clr-namespace:DemoProject.Popups.Pages.Mct"
+    x:TypeArguments="local:TestObject">
     <VerticalStackLayout
         Padding="20"
         BackgroundColor="White"

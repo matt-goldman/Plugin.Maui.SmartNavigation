@@ -58,7 +58,8 @@
                 BackgroundColor="{StaticResource Primary}"
                 CornerRadius="6"
                 Text="💾 Create Reminder"
-                TextColor="White" />
+                TextColor="White"
+                Clicked="OnCloseClicked"/>
 
         </Grid>
     </mct:BasePopup.BasePopupContent>

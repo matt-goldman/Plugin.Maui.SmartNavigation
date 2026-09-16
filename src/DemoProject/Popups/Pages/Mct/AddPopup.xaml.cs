@@ -21,7 +21,7 @@ public partial class AddPopup : BasePopup
             { 0, 1, new Animation(_ => popupContainer.TranslationY = _, popupContainer.TranslationY, 0, Easing.SinOut) }
         };
 
-        openAnimation.Commit(this, nameof(openAnimation), 16, 1500u, null);
+        openAnimation.Commit(this, nameof(openAnimation), 16, 500u, null);
     }
 
     public override async Task AnimationOnClose(BasePopup container, Border popupContainer)
@@ -40,5 +40,10 @@ public partial class AddPopup : BasePopup
         });
 
         await tcs.Task;
+    }
+
+    private async void OnCloseClicked(object? sender, EventArgs e)
+    {
+        await CloseAsync();
     }
 }

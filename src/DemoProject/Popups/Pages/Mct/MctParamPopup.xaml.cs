@@ -10,4 +10,9 @@ public partial class MctParamPopup : BasePopup
 
         BindingContext = viewModel;
     }
+
+    private async void OnCloseClicked (object? sender, EventArgs e)
+    {
+        await CloseAsync();
+    }
 }

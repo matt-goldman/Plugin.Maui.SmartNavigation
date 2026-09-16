@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mct="clr-namespace:DemoProject.Popups.Pages.Mct"
     xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels"
-    x:DataType="vm:PopupViewModel"
-    Color="#80000000">
+    x:DataType="vm:PopupViewModel">
     <Border
         Margin="70,0"
         Padding="10"
@@ -15,13 +14,18 @@
         MinimumHeightRequest="300"
         MinimumWidthRequest="300"
         Stroke="{StaticResource Magenta}"
-        StrokeShape="RoundRectangle 8"
-        VerticalOptions="Center">
-        <VerticalStackLayout>
+        StrokeShape="RoundRectangle 8">
+        <VerticalStackLayout VerticalOptions="Fill"
+                             HeightRequest="300">
             <Label
                 HorizontalOptions="Center"
                 Text="{Binding Message}"
                 VerticalOptions="Center" />
+            
+            <Button HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Text="Close"
+                    Clicked="OnCloseClicked"/>
         </VerticalStackLayout>
     </Border>
 </mct:BasePopup>

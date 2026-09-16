@@ -5,37 +5,23 @@ namespace DemoProject.Popups.Pages.Mct;
 
 public partial class MctPopupsMainPage : ContentPage
 {
-	public MctPopupsMainPage()
-	{
-		InitializeComponent();
-	}
+    public MctPopupsMainPage()
+    {
+        InitializeComponent();
+    }
 
     private async void OnMessagePopup_Clicked(object sender, EventArgs e)
     {
-        try
+        await Navigation.ShowPopupAsync<MessagePopup>(null, CancellationToken.None, new MessagePopupModel
         {
-            await Navigation.PushAsync<MessagePopup>(null, CancellationToken.None, new MessagePopupModel
-            {
-                Title = "Test message popup title",
-                Message = "Test message popup message"
-            });
-        }
-        catch (Exception ex)
-        {
-
-        }
+            Title = "Test message popup title",
+            Message = "Test message popup message"
+        });
     }
 
     private async void OnAddPopup_Clicked(object sender, EventArgs e)
     {
-        try
-        {
-            await Navigation.PushAsync<AddPopup>(null, CancellationToken.None);
-        }
-        catch (Exception ex)
-        {
-
-        }
+        await Navigation.ShowPopupAsync<AddPopup>();
     }
 
     private async void OnLoadingPopups_Clicked(object sender, EventArgs e)
@@ -45,45 +31,21 @@ public partial class MctPopupsMainPage : ContentPage
 
     private async void OnReturnObjectPopup_Clicked(object sender, EventArgs e)
     {
-        try
-        {
-            IPopupResult result = await Navigation.PushAsync<ReturnObjectPopup>(null, CancellationToken.None);
+        IPopupResult<TestObject> result = await Navigation.ShowPopupAsync<ReturnObjectPopup, TestObject>();
 
-            if (result is IPopupResult popupResult)
-            {
-                TestObject testObj = new TestObject
-                {
-                    Id = 123,
-                    Description = "Returned from Popup"
-                };
-
-                await DisplayAlertAsync("Return Object Result", testObj.ToString(), "OK");
-            }
-        }
-        catch (Exception ex)
+        if (!result.WasDismissedByTappingOutsideOfPopup && result.Result is TestObject testObj)
         {
-            // Handle exceptions appropriately
+            await DisplayAlertAsync("Return Object Result", testObj.ToString(), "OK");
         }
     }
 
     private async void OnEasyPopup_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync<MctEasyPopup>(null, CancellationToken.None);
+        await Navigation.ShowPopupAsync<MctEasyPopup>();
     }
 
     private async void OnMctParamPopup_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync<MctParamPopup>(null, CancellationToken.None, "It's alive!");
-    }
-
-    public class TestObject
-    {
-        public int Id { get; set; }
-        public string Description { get; set; }
-
-        public override string ToString()
-        {
-            return $"ID: {Id}, Description: {Description}";
-        }
+        await Navigation.ShowPopupAsync<MctParamPopup>(null, CancellationToken.None, "It's alive!");
     }
 }

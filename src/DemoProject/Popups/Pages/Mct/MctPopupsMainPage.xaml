@@ -33,14 +33,14 @@
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 SemanticProperties.Hint="Shows a resolved popup"
-                Text="Click to show popup with resolved dependncy" />
+                Text="Click to show popup with resolved dependency" />
 
             <Button
                 Clicked="OnMctParamPopup_Clicked"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 SemanticProperties.Hint="Shows a resolved popup"
-                Text="Click to show popup with resolved dependncy" />
+                Text="Click to show popup with resolved dependency and params" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
