@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+<PropertyGroup>
 	<NetCoreVersion>10.0</NetCoreVersion>
 	<TargetFramework>net$(NetCoreVersion)</TargetFramework>
     <UseMaui>true</UseMaui>
@@ -16,11 +16,12 @@
 
   <ItemGroup>
 	<InternalsVisibleTo Include="Plugin.Maui.SmartNavigation.MopupsExtensions" />
+	<InternalsVisibleTo Include="Plugin.Maui.SmartNavigation.MCTPopupExtensions" />
 	<InternalsVisibleTo Include="Plugin.Maui.SmartNavigation.IntegrationTests" />
   </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" />
+  </ItemGroup>
 
 </Project>

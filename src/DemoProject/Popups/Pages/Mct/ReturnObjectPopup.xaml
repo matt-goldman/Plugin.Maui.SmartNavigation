@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    x:Class="DemoProject.Popups.Pages.Mct.ReturnObjectPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <VerticalStackLayout
+        Padding="20"
+        BackgroundColor="White"
+        Spacing="15">
+        <Label
+            FontSize="18"
+            HorizontalOptions="Center"
+            Text="Hello from Popup!" />
+        <Button Clicked="OnCloseClicked" Text="Close" />
+    </VerticalStackLayout>
+</mct:Popup>

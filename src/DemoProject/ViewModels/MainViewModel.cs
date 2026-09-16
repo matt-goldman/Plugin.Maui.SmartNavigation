@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using DemoProject.Pages;
 using DemoProject.Popups.Pages;
+using DemoProject.Popups.Pages.Mct;
 using Mopups.Services;
 using Plugin.Maui.SmartNavigation.Extensions;
 using System.Diagnostics;
@@ -90,5 +91,11 @@ public partial class MainViewModel(INameService nameService) : BaseViewModel
     private void OpenWindow()
     {
         Application.Current?.OpenWindow<VmParamPage>("New Window");
+    }
+
+    [RelayCommand]
+    private async Task ShowMctPopups()
+    {
+        await Navigation.PushAsync<MctPopupsMainPage>();
     }
 }

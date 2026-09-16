@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:BasePopup
+    x:Class="DemoProject.Popups.Pages.Mct.MctEasyPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="clr-namespace:DemoProject.Popups.Pages.Mct"
+    xmlns:vm="clr-namespace:DemoProject.Popups.ViewModels"
+    x:DataType="vm:PopupViewModel"
+    Color="#80000000">
+    <Border
+        Margin="70,0"
+        Padding="10"
+        BackgroundColor="{StaticResource Magenta}"
+        HorizontalOptions="Center"
+        MinimumHeightRequest="300"
+        MinimumWidthRequest="300"
+        Stroke="{StaticResource Magenta}"
+        StrokeShape="RoundRectangle 8"
+        VerticalOptions="Center">
+        <VerticalStackLayout>
+            <Label
+                HorizontalOptions="Center"
+                Text="{Binding Message}"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+    </Border>
+</mct:BasePopup>

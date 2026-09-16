@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<NetCoreVersion>10.0</NetCoreVersion>
+		<TargetFramework>net$(NetCoreVersion)</TargetFramework>
+		<ImplicitUsings>Enable</ImplicitUsings>
+		<Nullable>Enable</Nullable>
+		<UseMaui>true</UseMaui>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>Plugin.Maui.SmartNavigation.MCTPopupExtensions</PackageId>
+		<Description>Maui Community Toolkit extensions for Plugin.Maui.SmartNavigation - push popup pages with resolved dependencies</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Plugin.Maui.SmartNavigation" Condition="'$(Configuration)'=='Release' AND '$(IS_CI_TEST)'!='true'" />
+		<PackageReference Include="CommunityToolkit.Maui" />
+		<PackageReference Include="Microsoft.Maui.Controls" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Plugin.Maui.SmartNavigation\Plugin.Maui.SmartNavigation.csproj" Condition="'$(Configuration)'=='Debug' OR '$(IS_CI_TEST)'=='true'" />
+	</ItemGroup>
+
+</Project>
