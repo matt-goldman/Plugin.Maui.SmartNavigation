@@ -154,6 +154,16 @@ public static class NavigationExtensions
     }
 
     /// <summary>
+    /// Creates a new window with a resolved page of type T (must inherit from Page)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="parameters">The constructor parameters expected by the page to be resolved</param>
+    public static Window CreateNewWindow<T>(params object[] parameters) where T : Page
+    {
+        return CreateWindow<T>(parameters);
+    }
+
+    /// <summary>
     /// Creates a new window with a resolved page of type T (must inherit from Page) and opens it, and returns the window
     /// </summary>
     /// <typeparam name="T"></typeparam>
