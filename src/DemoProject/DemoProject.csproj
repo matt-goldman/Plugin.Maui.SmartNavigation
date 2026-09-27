@@ -70,6 +70,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\DemoClassLibrary\DemoClassLibrary.csproj" />
 		<ProjectReference Include="..\Plugin.Maui.SmartNavigation.Attributes\Plugin.Maui.SmartNavigation.Attributes.csproj" />
 		<ProjectReference Include="..\Plugin.Maui.SmartNavigation.SourceGenerators\Plugin.Maui.SmartNavigation.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 		<ProjectReference Include="..\Plugin.Maui.SmartNavigation\Plugin.Maui.SmartNavigation.csproj" />

@@ -89,6 +89,12 @@
                     SemanticProperties.Hint="Opens a new window"
                     Text="Open window with injected dependencies"
                     IsEnabled="{OnIdiom Desktop=True, Default=False}"/>
+            
+            <Button Command="{Binding OpenClassLibPageCommand}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Opens a page from a class library"
+                    Text="Click to open a page from a MAUI Class Library" />
 
             <Image HeightRequest="310"
                    HorizontalOptions="Center"

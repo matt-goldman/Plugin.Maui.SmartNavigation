@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DemoClassLibrary.ViewModels"
+             x:DataType="vm:ClassLibViewModel"
+             x:Class="DemoClassLibrary.Pages.ClassLibPage">
+    <VerticalStackLayout VerticalOptions="Fill"
+                         HorizontalOptions="Fill"
+                         Spacing="50">
+        <Label HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="24"
+               Text="Class Library Demo Page" />
+        
+        <Label HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Text="Get a new GUID"/>
+        
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Text="Guid:"/>
+            <Label Text="{Binding GuidValue}"
+                   HeightRequest="40"/>
+        </VerticalStackLayout>
+        
+        <Button HorizontalOptions="Center"
+                Text="Git GUID"
+                Command="{Binding GetGuidCommand}" />
+        
+    </VerticalStackLayout>
+        
+</ContentPage>
