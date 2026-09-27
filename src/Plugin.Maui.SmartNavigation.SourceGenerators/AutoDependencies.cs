@@ -10,6 +10,16 @@ namespace Plugin.Maui.SmartNavigation.SourceGenerators
     [Generator]
     public class AutoDependencies : IIncrementalGenerator
     {
+        private const string UseAutoDependenciesAttributeName = "Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute";
+
+        private static readonly DiagnosticDescriptor MultipleStartupClassesDescriptor = new DiagnosticDescriptor(
+            id: "SNAV001",
+            title: "Multiple classes decorated with [UseAutoDependencies]",
+            messageFormat: "'{0}' is decorated with [UseAutoDependencies] but will be ignored; only one class per assembly is supported and '{1}' is being used",
+            category: "Plugin.Maui.SmartNavigation",
+            defaultSeverity: DiagnosticSeverity.Warning,
+            isEnabledByDefault: true);
+
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Get the compilation
@@ -31,22 +41,36 @@ namespace Plugin.Maui.SmartNavigation.SourceGenerators
 
                     var dependencies = InitialiseDependencies(types);
 
-                    Log.WriteLine("Getting MauiProgram...");
+                    Log.WriteLine("Getting startup class...");
 
-                    // Find MauiProgram by scanning for the [UseAutoDependencies] attribute
-                    // rather than assuming namespace matches assembly name.
-                    var mauiProgram = types.FirstOrDefault(t =>
-                        t.Name == "MauiProgram" &&
-                        t.GetAttributes().Any(ad =>
-                            ad.AttributeClass?.ToDisplayString() == "Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute"));
+                    // Find the startup class by scanning for the [UseAutoDependencies] attribute.
+                    // Any class can opt in (e.g. MauiProgram in an app, or a startup class in a
+                    // MAUI class library); only the current assembly is scanned.
+                    var startupClasses = types
+                        .Where(t => t.TypeKind == TypeKind.Class &&
+                            t.GetAttributes().Any(ad =>
+                                ad.AttributeClass?.ToDisplayString() == UseAutoDependenciesAttributeName))
+                        .OrderBy(t => t.ToDisplayString(), StringComparer.Ordinal)
+                        .ToList();
 
-                    if (mauiProgram is null)
+                    if (startupClasses.Count == 0)
                     {
-                        Log.WriteLine("MauiProgram not found");
+                        Log.WriteLine("No class decorated with [UseAutoDependencies] found");
                         return;
                     }
 
-                    Log.WriteLine($"Found main method: {mauiProgram.Name}");
+                    var startupClass = startupClasses[0];
+
+                    foreach (var duplicate in startupClasses.Skip(1))
+                    {
+                        spc.ReportDiagnostic(Diagnostic.Create(
+                            MultipleStartupClassesDescriptor,
+                            duplicate.Locations.FirstOrDefault(),
+                            duplicate.ToDisplayString(),
+                            startupClass.ToDisplayString()));
+                    }
+
+                    Log.WriteLine($"Found startup class: {startupClass.ToDisplayString()}");
 
                     StringBuilder sourceBuilder = new StringBuilder();
 
@@ -60,7 +84,7 @@ using Microsoft.Maui.Hosting;
 // </auto-generated>
 // ---------------
 
-namespace {mauiProgram.ContainingNamespace.ToDisplayString()};
+namespace {startupClass.ContainingNamespace.ToDisplayString()};
 
 public static class PageResolverExtensions
 {{

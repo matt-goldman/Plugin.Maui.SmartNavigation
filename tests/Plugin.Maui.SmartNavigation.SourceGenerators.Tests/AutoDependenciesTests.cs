@@ -112,4 +112,51 @@ public sealed class AutoDependenciesTests
         // Assert
         await TestHelper.Verify(source);
     }
+
+    [Fact]
+    public async Task AutoDependencies_AttributeOnNonMauiProgramClass_GeneratesInThatClassNamespace()
+    {
+        // Arrange
+        const string source = """
+			namespace MyFeatureLibrary.Startup;
+
+			[Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute]
+			public static class FeatureStartup
+			{
+			}
+
+			public class HomePage { }
+			public class HomePageViewModel { }
+			public class MyService { }
+			public interface IMyService { }
+			""";
+
+        // Assert
+        await TestHelper.Verify(source);
+    }
+
+    [Fact]
+    public async Task AutoDependencies_MultipleAttributedClasses_UsesFirstAndWarns()
+    {
+        // Arrange
+        const string source = """
+			namespace TestAssembly;
+
+			[Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute]
+			public static class MauiProgram
+			{
+			}
+
+			[Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute]
+			public static class OtherStartup
+			{
+			}
+
+			public class HomePage { }
+			public class HomePageViewModel { }
+			""";
+
+        // Assert
+        await TestHelper.Verify(source);
+    }
 }

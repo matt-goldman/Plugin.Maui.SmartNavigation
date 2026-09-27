@@ -1,0 +1,24 @@
+﻿{
+  Diagnostics: [
+    {
+      Location: /*
+[Plugin.Maui.SmartNavigation.Attributes.UseAutoDependenciesAttribute]
+public static class OtherStartup
+                    ^^^^^^^^^^^^
+{
+*/
+ : (8,20)-(8,32),
+      Message: 'TestAssembly.OtherStartup' is decorated with [UseAutoDependencies] but will be ignored; only one class per assembly is supported and 'TestAssembly.MauiProgram' is being used,
+      Severity: Warning,
+      WarningLevel: 1,
+      Descriptor: {
+        Id: SNAV001,
+        Title: Multiple classes decorated with [UseAutoDependencies],
+        MessageFormat: '{0}' is decorated with [UseAutoDependencies] but will be ignored; only one class per assembly is supported and '{1}' is being used,
+        Category: Plugin.Maui.SmartNavigation,
+        DefaultSeverity: Warning,
+        IsEnabledByDefault: true
+      }
+    }
+  ]
+}
