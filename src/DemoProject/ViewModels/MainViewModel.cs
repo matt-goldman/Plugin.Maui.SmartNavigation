@@ -5,6 +5,7 @@ using DemoProject.Popups.Pages;
 using Mopups.Services;
 using Plugin.Maui.SmartNavigation.Extensions;
 using System.Diagnostics;
+using DemoClassLibrary.Pages;
 
 namespace DemoProject.ViewModels;
 
@@ -90,5 +91,11 @@ public partial class MainViewModel(INameService nameService) : BaseViewModel
     private void OpenWindow()
     {
         Application.Current?.OpenWindow<VmParamPage>("New Window");
+    }
+
+    [RelayCommand]
+    private async Task OpenClassLibPage()
+    {
+        await Navigation.PushAsync<ClassLibPage>();
     }
 }

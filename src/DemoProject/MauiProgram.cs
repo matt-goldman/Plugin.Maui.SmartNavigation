@@ -1,4 +1,5 @@
-﻿using DemoProject.Popups.Pages;
+﻿using DemoClassLibrary;
+using DemoProject.Popups.Pages;
 using DemoProject.Popups.ViewModels;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
@@ -26,6 +27,9 @@ public static class MauiProgram
 			builder.Services.AddTransient<ParamPopup>();
 
 			StartupExtensions.UpsertViewModelMapping<ParamPopup, ParamPopupViewModel>();
+            
+            // add class lib dependencies
+            builder.AddClassLibrary();
 
 #if DEBUG
 		builder.Logging.AddDebug();

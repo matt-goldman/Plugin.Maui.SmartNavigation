@@ -174,6 +174,8 @@ public static class MauiProgram
 }
 ```
 
+The attribute can go on any class, not just `MauiProgram`. For example, you can put it on a dependency injection or startup class in a .NET MAUI class library. The generator only scans the assembly that contains the decorated class. It generates the `UseAutodependencies()` extension method in that class's namespace. Only one class per assembly should be decorated. If there are more, the generator uses the first one and raises warning `SNAV001` for each of the others.
+
 ## Lifetime Attributes
 
 Defaults:
